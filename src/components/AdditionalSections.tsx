@@ -62,7 +62,6 @@ const AdditionalSections = () => {
                   <div className="ml-4">
                     <h4 className="text-lg font-medium">開場・開演</h4>
                     <div className="mt-2 space-y-1">
-                      <p className="text-gray-700 dark:text-gray-300">{currentEvent.openTime}</p>
                       <p className="text-gray-700 dark:text-gray-300">{currentEvent.time}</p>
                     </div>
                   </div>
