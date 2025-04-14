@@ -11,7 +11,7 @@ const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image 
-          src="/images/hero-bg.jpg" 
+          src="/images/hero-bg.jpg.jpg" 
           alt="YAGATE LIVEイベントの雰囲気を表す背景画像"
           fill
           priority
