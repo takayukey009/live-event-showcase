@@ -185,12 +185,12 @@ const AdditionalSections = () => {
               className="bg-white dark:bg-primary/20 p-6 rounded-lg shadow-md"
             >
               <h3 className="text-xl font-bold mb-4">下北沢シアターミネルヴァ</h3>
-              <p className="mb-2"><span className="font-medium">住所:</span> 東京都世田谷区北沢2-1-12 SAKURAビル4F</p>
+              <p className="mb-2"><span className="font-medium">住所:</span> 〒155-0031 東京都世田谷区北沢２丁目７−１４</p>
               <p className="mb-6"><span className="font-medium">アクセス:</span> 京王井の頭線・小田急線 下北沢駅から徒歩3分</p>
               
               <div className="aspect-video relative rounded-lg overflow-hidden">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.5774330921384!2d139.66601687677547!3d35.66131167259364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f36d4a0812ef%3A0x7ac4eb4a797c7cd0!2z5LiL5YyX5rKi44K344Ki44K_44O844Of44ON44Or44O044KL!5e0!3m2!1sja!2sjp!4v1712667295830!5m2!1sja!2sjp" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.5635374892176!2d139.66690287677544!3d35.66176167259339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f36d5d8d3d85%3A0x4a8e7ff27be3a2c6!2z44CSMTU1LTAwMzEg5p2x5Lqs6YO95LiW55Sw6LC35Yy65YyX5rKi77yS5LiB55uu77yX4oiS77yR77yU!5e0!3m2!1sja!2sjp!4v1713177555626!5m2!1sja!2sjp" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
@@ -211,9 +211,9 @@ const AdditionalSections = () => {
               <div className="bg-white dark:bg-primary/20 p-6 rounded-lg shadow-md mb-6">
                 <h3 className="text-xl font-bold mb-4">注意事項</h3>
                 <ul className="list-disc list-inside space-y-2">
-                  <li>開場は公演開始の30分前です</li>
+                  <li>開場は公演開始の15分前です</li>
                   <li>チケットは電子チケットのみの取り扱いとなります</li>
-                  <li>会場内での写真撮影・録音・録画は禁止となっております</li>
+                  <li>会場内での写真撮影・録音・録画は当日案内があります</li>
                   <li>公演中の入退場は他のお客様のご迷惑となりますのでご遠慮ください</li>
                 </ul>
               </div>

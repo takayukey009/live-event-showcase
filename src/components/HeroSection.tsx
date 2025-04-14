@@ -46,11 +46,6 @@ const HeroSection = () => {
             {currentEvent.date} {currentEvent.day}
           </h1>
           <div className="flex flex-col items-center space-y-1 mb-2">
-            {currentEvent.openTime && (
-              <p className="text-xl md:text-2xl font-display">
-                {currentEvent.openTime}
-              </p>
-            )}
             <p className="text-2xl md:text-3xl font-display">
               {currentEvent.time}
             </p>
