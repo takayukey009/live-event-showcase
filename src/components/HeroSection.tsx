@@ -7,17 +7,19 @@ import { currentEvent } from '@/data/siteConfig';
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Video/Image */}
+    <section id="home" className="relative h-screen w-full overflow-hidden">
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image 
-          src={currentEvent.heroImage} 
+          src="/images/hero-bg.jpg.jpg" 
           alt="Live concert atmosphere"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center brightness-50"
+          className="object-cover object-center brightness-30" 
         />
+        {/* 追加の暗いオーバーレイ */}
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
       
       {/* Overlay gradient */}
@@ -33,16 +35,26 @@ const HeroSection = () => {
         >
           <h2 className="text-accent font-medium text-lg md:text-xl mb-2">NEXT LIVE</h2>
           {currentEvent.eventName && (
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-4">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-2">
               Y<span className="text-white">A</span>G<span className="text-secondary">A</span>TE
+              {currentEvent.eventVolume && (
+                <span className="text-2xl md:text-3xl lg:text-4xl ml-2 align-top">{currentEvent.eventVolume}</span>
+              )}
             </h1>
           )}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-2">
             {currentEvent.date} {currentEvent.day}
           </h1>
-          <p className="text-2xl md:text-3xl font-display mb-2">
-            {currentEvent.time}
-          </p>
+          <div className="flex flex-col items-center space-y-1 mb-2">
+            {currentEvent.openTime && (
+              <p className="text-xl md:text-2xl font-display">
+                {currentEvent.openTime}
+              </p>
+            )}
+            <p className="text-2xl md:text-3xl font-display">
+              {currentEvent.time}
+            </p>
+          </div>
           <p className="text-xl md:text-2xl mb-8">
             at {currentEvent.venue}
           </p>

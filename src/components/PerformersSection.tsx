@@ -23,7 +23,7 @@ const item = {
 
 const PerformersSection = () => {
   return (
-    <section className="py-16 px-4 md:px-8 bg-light dark:bg-dark">
+    <section id="performers" className="py-16 px-4 md:px-8 bg-light dark:bg-dark">
       <div className="max-w-7xl mx-auto">
         <motion.h2 
           initial={{ opacity: 0, x: -20 }}

@@ -3,7 +3,6 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import PerformersSection from '@/components/PerformersSection';
 import AdditionalSections from '@/components/AdditionalSections';
-import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -12,7 +11,6 @@ export default function Home() {
       <HeroSection />
       <PerformersSection />
       <AdditionalSections />
-      <Footer />
     </main>
   );
 }

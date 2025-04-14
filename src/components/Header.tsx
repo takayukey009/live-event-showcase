@@ -23,6 +23,25 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // スムーズスクロール関数
+  const scrollToSection = (sectionId: string) => {
+    setIsMobileMenuOpen(false);
+    
+    // homeの場合はトップにスクロール
+    if (sectionId === 'home') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+    
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -31,20 +50,31 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-white font-display font-bold text-xl md:text-2xl">
+        <a 
+          href="#" 
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection('home');
+          }}
+          className="text-white font-display font-bold text-xl md:text-2xl"
+        >
           Y<span className="text-white">A</span>G<span className="text-secondary">A</span>TE <span className="text-white">LIVE</span>
-        </Link>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {['HOME', 'SCHEDULE', 'PERFORMERS', 'ACCESS'].map((item) => (
-            <Link 
+          {['HOME', 'PERFORMERS', 'SCHEDULE', 'CONCEPT', 'ACCESS'].map((item) => (
+            <a 
               key={item} 
-              href={`/${item.toLowerCase()}`}
+              href={`#${item.toLowerCase()}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.toLowerCase());
+              }}
               className="text-white hover:text-secondary transition-colors duration-200"
             >
               {item}
-            </Link>
+            </a>
           ))}
           <a 
             href={currentEvent.ticketUrl}
@@ -76,15 +106,18 @@ const Header = () => {
           className="md:hidden bg-primary/95 backdrop-blur-md"
         >
           <div className="px-4 py-5 space-y-4">
-            {['HOME', 'SCHEDULE', 'PERFORMERS', 'ACCESS'].map((item) => (
-              <Link 
+            {['HOME', 'PERFORMERS', 'SCHEDULE', 'CONCEPT', 'ACCESS'].map((item) => (
+              <a 
                 key={item} 
-                href={`/${item.toLowerCase()}`}
+                href={`#${item.toLowerCase()}`}
                 className="block text-white hover:text-secondary transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.toLowerCase());
+                }}
               >
                 {item}
-              </Link>
+              </a>
             ))}
             <a 
               href={currentEvent.ticketUrl}
