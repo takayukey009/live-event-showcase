@@ -32,6 +32,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://yagate-live.vercel.app',
   },
+  other: {
+    'line:card': 'summary_large_image',
+    'line:title': `YAGATE LIVE ${currentEvent.eventVolume} | ${currentEvent.date}`,
+    'line:description': '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」',
+    'line:image': 'https://yagate-live.vercel.app/images/og-image.jpg',
+  },
 }
 
 export default function RootLayout({
