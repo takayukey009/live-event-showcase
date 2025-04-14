@@ -41,26 +41,36 @@ const PerformersSection = () => {
           whileInView="show"
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-8"
+          role="list"
+          aria-label="出演者一覧"
         >
           {performers.map((performer) => (
             <motion.div 
               key={performer.id}
               variants={item}
               className="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-lg"
+              role="listitem"
+              aria-label={`${performer.name}${performer.isGuest ? ' (ゲスト)' : ''}`}
             >
               <Image 
                 src={performer.image} 
-                alt={performer.name}
+                alt={`${performer.name}の写真`}
                 fill
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
               />
               
               {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div 
+                className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                aria-hidden="true"
+              ></div>
               
               {/* Performer name */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <div 
+                className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                aria-hidden="true"
+              >
                 <h3 className="text-xl md:text-2xl font-display font-bold text-white">
                   {performer.name}
                 </h3>

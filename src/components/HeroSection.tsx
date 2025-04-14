@@ -7,23 +7,23 @@ import { currentEvent } from '@/data/siteConfig';
 
 const HeroSection = () => {
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden">
+    <section id="home" className="relative h-screen w-full overflow-hidden" aria-label="YAGATE LIVE イベント情報">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image 
           src="/images/hero-bg.jpg.jpg" 
-          alt="Live concert atmosphere"
+          alt="YAGATE LIVEイベントの雰囲気を表す背景画像"
           fill
           priority
           sizes="100vw"
           className="object-cover object-center brightness-30" 
         />
         {/* 追加の暗いオーバーレイ */}
-        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-black/40" aria-hidden="true"></div>
       </div>
       
       {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/30 to-primary/80 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/30 to-primary/80 z-10" aria-hidden="true"></div>
       
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col items-center justify-center text-white px-4 md:px-8">
@@ -33,7 +33,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h2 className="text-accent font-medium text-lg md:text-xl mb-2">NEXT LIVE</h2>
+          <h2 className="text-accent font-medium text-lg md:text-xl mb-2" aria-label="次回のライブ">NEXT LIVE</h2>
           {currentEvent.eventName && (
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-2">
               Y<span className="text-white">A</span>G<span className="text-secondary">A</span>TE
