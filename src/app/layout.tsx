@@ -4,11 +4,11 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: `YAGATE LIVE ${currentEvent.eventVolume} | ${currentEvent.date} at ${currentEvent.venue}`,
-  description: '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。日々進化を続けるGATE所属の若手お笑い芸人たちと実力派ゲストとの化学反応から生まれる、予測不能でエッジの効いた展開をお楽しみください。',
+  description: '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。日々進化を続けるGATE所属の若手お笑い芸人と実力派ゲストとの化学反応から生まれる展開をお楽しみください。',
   keywords: ['YAGATE', 'お笑いライブ', 'GATE', '下北沢', 'ライブイベント', 'お笑い', 'コメディ'],
   openGraph: {
     title: `YAGATE LIVE ${currentEvent.eventVolume} | ${currentEvent.date}`,
-    description: '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。日々進化を続けるGATE所属の若手お笑い芸人たちと実力派ゲストとの化学反応をお楽しみください。',
+    description: '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。日々進化を続けるGATE所属の若手お笑い芸人と実力派ゲストとの化学反応から生まれる展開をお楽しみください。',
     url: 'https://yagate-live.vercel.app',
     siteName: 'YAGATE LIVE',
     images: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `YAGATE LIVE ${currentEvent.eventVolume} | ${currentEvent.date}`,
-    description: '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」',
+    description: '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。日々進化を続けるGATE所属の若手お笑い芸人と実力派ゲストの化学反応をお楽しみください。',
     images: ['https://yagate-live.vercel.app/images/og-image.jpg'],
     creator: '@gate_yagate',
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   other: {
     'line:card': 'summary_large_image',
     'line:title': `YAGATE LIVE ${currentEvent.eventVolume} | ${currentEvent.date}`,
-    'line:description': '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」',
+    'line:description': '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。日々進化を続けるGATE所属の若手お笑い芸人と実力派ゲストの化学反応をお楽しみください。',
     'line:image': 'https://yagate-live.vercel.app/images/og-image.jpg',
   },
 }
