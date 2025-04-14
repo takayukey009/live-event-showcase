@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     siteName: 'YAGATE LIVE',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: 'https://yagate-live.vercel.app/images/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'YAGATE LIVE イベント画像',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `YAGATE LIVE ${currentEvent.eventVolume} | ${currentEvent.date}`,
     description: '毎月、都内で開催されるGATEがお届けする若手お笑いライブ「YAGATE」',
-    images: ['/images/og-image.jpg'],
+    images: ['https://yagate-live.vercel.app/images/og-image.jpg'],
     creator: '@gate_yagate',
   },
   alternates: {
