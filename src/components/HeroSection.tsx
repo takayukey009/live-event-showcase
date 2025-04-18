@@ -1,23 +1,17 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { currentEvent } from '@/data/siteConfig';
+import BackgroundAnimation from './BackgroundAnimation';
 
 const HeroSection = () => {
   return (
     <section id="home" className="relative h-screen w-full overflow-hidden" aria-label="YAGATE LIVE イベント情報">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="/images/hero-bg.jpg.jpg" 
-          alt="YAGATE LIVEイベントの雰囲気を表す背景画像"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center brightness-30" 
-        />
+        {/* THREE.jsアニメーション背景 */}
+        <BackgroundAnimation />
         {/* 追加の暗いオーバーレイ */}
         <div className="absolute inset-0 bg-black/40" aria-hidden="true"></div>
       </div>
