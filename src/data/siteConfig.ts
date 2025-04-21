@@ -19,7 +19,7 @@ export const currentEvent: LiveEvent = {
   day: 'WED',
   time: '19:45 開演（19:30 開場）',
   venue: '下北沢シアターミネルヴァ',
-  ticketUrl: 'https://tiget.net/events/380197?s=09',
+  ticketUrl: 'https://tiget.net/events/394578',
   heroImage: '/images/hero-bg.jpg',
   eventName: 'YAGATE',
   eventVolume: 'vol. 22',
