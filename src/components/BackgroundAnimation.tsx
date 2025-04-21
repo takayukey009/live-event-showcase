@@ -354,7 +354,7 @@ export default function BackgroundAnimation() {
             flareProps.active = false
             flareProps.progress = 0
             flareProps.nextFlareTime = 5 + Math.random() * 10
-            material.emissive = undefined
+            material.emissive = new THREE.Color(0x000000)
             material.emissiveIntensity = 0
           } else {
             // Calculate flare intensity (peak in the middle)
