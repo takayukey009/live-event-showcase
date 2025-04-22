@@ -50,25 +50,70 @@ const PerformersSection = () => {
               variants={item}
               className="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-lg"
               role="listitem"
-              aria-label={`${performer.name}${performer.isGuest ? ' (ゲスト)' : ''}`}
+              aria-label={`${performer.name}${performer.isGuest ? ' (ゲスト)' : ''}${performer.onBreak ? ' (休演)' : ''}`}
             >
+              {/* Special: Left grayscale for イクラボブチャンチャン */}
+              {performer.name === 'イクラボブチャンチャン' && (
+                <>
+                  {/* Left half grayscale overlay (z-10) */}
+                  <div className="absolute inset-y-0 left-0 w-1/2 z-10 pointer-events-none">
+                    <div className="w-full h-full grayscale brightness-40" style={{backgroundColor:'rgba(0,0,0,0.1)'}}></div>
+                  </div>
+                  {/* Centered performer name (z-20) */}
+                  <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                    <span className="text-white text-2xl md:text-3xl font-bold drop-shadow-lg text-center select-none" style={{textShadow:'0 2px 6px rgba(0,0,0,0.7)'}}>
+                      {performer.name}
+                    </span>
+                  </div>
+                  {/* Note badge at bottom center (z-20) */}
+                  {performer.note && (
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+                      <span className="inline-block bg-primary text-white text-base px-5 py-2 rounded shadow font-semibold tracking-wide">
+                        {performer.note}
+                      </span>
+                    </div>
+                  )}
+                </>
+              )}
+              {/* Note badge for others (if any) - left top */}
+              {performer.note && performer.name !== 'イクラボブチャンチャン' && (
+                <div className="absolute top-3 left-3 z-10">
+                  <span className="inline-block bg-primary text-white text-xs px-3 py-1 rounded shadow font-semibold">
+                    {performer.note}
+                  </span>
+                </div>
+              )}
               <Image 
                 src={performer.image} 
                 alt={`${performer.name}の写真`}
                 fill
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                className={`object-cover object-center transition-transform duration-500 ${performer.onBreak ? 'grayscale brightness-40' : 'group-hover:scale-110'}`}
               />
               
-              {/* Overlay gradient */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                aria-hidden="true"
-              ></div>
+              {/* Overlay gradient for normal performers */}
+              {!performer.onBreak && (
+                <div 
+                  className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  aria-hidden="true"
+                ></div>
+              )}
               
-              {/* Performer name */}
+              {/* Overlay for performers on break: just a dark overlay and "休演" */}
+              {performer.onBreak && (
+                <div 
+                  className="absolute inset-0 bg-gradient-to-br from-black/80 to-gray-900/90 flex flex-col items-center justify-center"
+                  aria-hidden="true"
+                >
+                  <div className="border border-white/30 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">
+                    <span className="text-white/90 font-medium tracking-wider">休演</span>
+                  </div>
+                </div>
+              )}
+              
+              {/* Performer name for others */}
               <div 
-                className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                className={`absolute bottom-0 left-0 right-0 p-4 ${performer.onBreak ? 'translate-y-0' : 'transform translate-y-full group-hover:translate-y-0'} transition-transform duration-300`}
                 aria-hidden="true"
               >
                 <h3 className="text-xl md:text-2xl font-display font-bold text-white">
@@ -77,6 +122,11 @@ const PerformersSection = () => {
                 {performer.isGuest && (
                   <span className="inline-block bg-secondary text-white text-xs px-2 py-1 rounded mt-2">
                     GUEST
+                  </span>
+                )}
+                {performer.onBreak && performer.name !== '友田オレ' && (
+                  <span className="inline-block bg-black/70 border border-white/20 text-white/90 text-xs px-2 py-1 rounded mt-2 backdrop-blur-sm">
+                    休演
                   </span>
                 )}
               </div>
