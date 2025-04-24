@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://yagate-live.vercel.app
+
+# Sitemaps
+Sitemap: https://yagate-live.vercel.app/sitemap.xml

@@ -85,7 +85,7 @@ const PerformersSection = () => {
               )}
               <Image 
                 src={performer.image} 
-                alt={`${performer.name}の写真`}
+                alt={`${performer.name}（${performer.description ? performer.description : '出演者'}）の写真${performer.onBreak ? '（休演）' : ''}${performer.isGuest ? '（ゲスト）' : ''}`}
                 fill
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 className={`object-cover object-center transition-transform duration-500 ${performer.onBreak ? 'grayscale brightness-40' : 'group-hover:scale-110'}`}
