@@ -11,15 +11,9 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
   },
-  // リダイレクト設定を追加
+  // リダイレクト設定を修正
   async redirects() {
     return [
-      // HTTPからHTTPSへのリダイレクト
-      {
-        source: 'http://:host/:path*',
-        destination: 'https://:host/:path*',
-        permanent: true,
-      },
       // non-WWWからWWWへのリダイレクト
       {
         source: '/:path*',
@@ -35,5 +29,4 @@ const nextConfig = {
     ];
   },
 }
-
 module.exports = nextConfig
