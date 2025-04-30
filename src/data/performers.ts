@@ -14,6 +14,6 @@ export const performers: Performer[] = [
   { id: 3, name: 'イクラボブチャンチャン（今回はイトヤマのみ）', image: '/images/performer-3.jpg', isGuest: false, description: '個性派コンビ' },
   { id: 4, name: 'シャワーカーテニスト', image: '/images/performer-4.jpg', isGuest: false, description: '新進気鋭の芸人' },
   { id: 5, name: 'ベルナルド', image: '/images/berunarudo.jpg', isGuest: true, description: 'ゲスト芸人' },
-  { id: 6, name: '未定', image: '/images/performer-6.jpg', isGuest: true, description: 'ゲスト芸人（調整中）' },
-  { id: 7, name: '未定', image: '/images/coming-soon.jpg', isGuest: true, description: 'ゲスト芸人（調整中）' },
+  { id: 6, name: '清水駿平', image: '/images/shimizu.jpg', isGuest: true, description: 'ゲスト芸人' },
+  { id: 7, name: 'おミルク', image: '/images/omilk.jpg', isGuest: true, description: 'ゲスト芸人' },
 ];

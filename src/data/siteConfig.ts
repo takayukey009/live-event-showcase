@@ -16,9 +16,9 @@ export interface LiveEvent {
 }
 
 export const currentEvent: LiveEvent = {
-  date: '2025.04.30',
+  date: '2025-04-30',
   day: 'WED',
-  time: '19:45 開演（19:30 開場）',
+  time: '19:45',
   venue: '下北沢シアターミネルヴァ',
   ticketUrl: 'https://tiget.net/events/394578',
   heroImage: '/images/hero-bg.jpg',
