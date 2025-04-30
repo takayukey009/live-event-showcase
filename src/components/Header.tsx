@@ -63,18 +63,30 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {['HOME', 'PERFORMERS', 'SCHEDULE', 'CONCEPT', 'ACCESS'].map((item) => (
-            <a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(item.toLowerCase());
-              }}
-              className="text-white hover:text-secondary transition-colors duration-200"
-            >
-              {item}
-            </a>
+          {['HOME', 'PERFORMERS', 'SCHEDULE', 'CONCEPT', 'ACCESS'].map((item, idx, arr) => (
+            <React.Fragment key={item}>
+              <a 
+                href={`#${item.toLowerCase()}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.toLowerCase());
+                }}
+                className="text-white hover:text-secondary transition-colors duration-200"
+              >
+                {item}
+              </a>
+              {/* Insert ARCHIVE link after ACCESS */}
+              {item === 'ACCESS' && (
+                <span className="inline-block mx-4">
+                  <a
+                    href="/past-events"
+                    className="text-white hover:text-secondary transition-colors duration-200"
+                  >
+                    ARCHIVE
+                  </a>
+                </span>
+              )}
+            </React.Fragment>
           ))}
           <a 
             href={currentEvent.ticketUrl}
@@ -106,18 +118,31 @@ const Header = () => {
           className="md:hidden bg-primary/95 backdrop-blur-md"
         >
           <div className="px-4 py-5 space-y-4">
-            {['HOME', 'PERFORMERS', 'SCHEDULE', 'CONCEPT', 'ACCESS'].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase()}`}
-                className="block text-white hover:text-secondary transition-colors duration-200"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.toLowerCase());
-                }}
-              >
-                {item}
-              </a>
+            {['HOME', 'PERFORMERS', 'SCHEDULE', 'CONCEPT', 'ACCESS'].map((item, idx, arr) => (
+              <React.Fragment key={item}>
+                <a 
+                  href={`#${item.toLowerCase()}`}
+                  className="block text-white hover:text-secondary transition-colors duration-200"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.toLowerCase());
+                  }}
+                >
+                  {item}
+                </a>
+                {/* Insert ARCHIVE link after ACCESS */}
+                {item === 'ACCESS' && (
+                  <span className="block my-2">
+                    <a
+                      href="/past-events"
+                      className="block text-white hover:text-secondary transition-colors duration-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      ARCHIVE
+                    </a>
+                  </span>
+                )}
+              </React.Fragment>
             ))}
             <a 
               href={currentEvent.ticketUrl}
