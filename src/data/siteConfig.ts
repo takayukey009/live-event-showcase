@@ -13,6 +13,7 @@ export interface LiveEvent {
     secondHalf: string;
     endTime: string;
   };
+  openTime?: string;
 }
 
 export const currentEvent: LiveEvent = {
@@ -33,7 +34,8 @@ export const currentEvent: LiveEvent = {
     firstHalf: 'GATE所属芸人・ゲスト芸人のネタ',
     secondHalf: '企画コーナー',
     endTime: '21:00頃 終了予定'
-  }
+  },
+  openTime: '19:30',
 };
 
 export const siteConfig = {
