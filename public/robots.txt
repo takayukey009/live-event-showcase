@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://yagate-live.vercel.app
+Host: https://www.yagate.jp
 
 # Sitemaps
-Sitemap: https://yagate-live.vercel.app/sitemap.xml
+Sitemap: https://www.yagate.jp/sitemap.xml
