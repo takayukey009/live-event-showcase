@@ -1,4 +1,4 @@
 {
-  "/past-events/page": "app/past-events/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/past-events/page": "app/past-events/page.js"
 }

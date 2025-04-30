@@ -1,9 +1,11 @@
 import React from 'react';
 import { pastEvents } from '@/data/pastEvents';
+import EventListJsonLd from './EventListJsonLd';
 
 export default function PastEventsPage() {
   return (
     <main className="max-w-3xl mx-auto py-12 px-4">
+      <EventListJsonLd />
       <h1 className="text-3xl font-bold mb-8 text-center">過去の開催一覧</h1>
       <div className="space-y-6">
         {pastEvents.map(event => (
