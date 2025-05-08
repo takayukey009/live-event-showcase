@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { currentEvent } from '@/data/siteConfig';
+import { pastEvents } from '@/data/pastEvents';
 
 // Animation variants
 const fadeInUp = {
@@ -13,6 +14,11 @@ const fadeInUp = {
 };
 
 const AdditionalSections = () => {
+  // 表示するイベント数を管理するstate
+  const [showAllEvents, setShowAllEvents] = useState(false);
+  
+  // 表示するイベント
+  const displayedEvents = showAllEvents ? pastEvents : pastEvents.slice(0, 12);
   return (
     <>
       {/* Schedule Section */}
@@ -205,7 +211,8 @@ const AdditionalSections = () => {
                   allowFullScreen 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="会場地図"
+                  title="下北沢シアターミネルヴァの地図"
+                  aria-label="下北沢シアターミネルヴァの地図 - 東京都世田谷区北沢2-7-14"
                 ></iframe>
               </div>
             </motion.div>
@@ -295,6 +302,94 @@ const AdditionalSections = () => {
               </a>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Archive Section */}
+      <section id="archive" className="py-16 px-4 md:px-8 bg-gray-50 dark:bg-primary/10">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="section-heading text-center"
+          >
+            ARCHIVE
+          </motion.h2>
+          
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-8 text-gray-700 dark:text-gray-300"
+          >
+            過去のYAGATE公演記録
+          </motion.p>
+          
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {displayedEvents.map((event, index) => (
+              <div 
+                key={event.volume} 
+                className="bg-white dark:bg-primary/20 rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg focus-within:ring-2 focus-within:ring-primary"
+                tabIndex={0}
+              >
+                <div className="p-5">
+                  <h3 className="text-xl font-bold mb-2">{event.name}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{event.date} ({event.day})</p>
+                  
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                    <h4 className="font-medium mb-2 text-gray-800 dark:text-gray-200">出演者</h4>
+                    <ul className="space-y-1">
+                      {event.performers.map((performer, idx) => (
+                        <li key={idx} className="text-gray-700 dark:text-gray-300">{performer}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+          
+          {!showAllEvents && pastEvents.length > 12 && (
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="mt-10 text-center"
+            >
+              <button 
+                className="inline-block btn-secondary"
+                aria-label="YAGATE vol.13以降のイベントをすべて見る"
+                onClick={() => setShowAllEvents(true)}
+              >
+                もっと見る
+              </button>
+            </motion.div>
+          )}
+          
+          {showAllEvents && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mt-10 text-center"
+            >
+              <button 
+                className="inline-block btn-secondary"
+                onClick={() => setShowAllEvents(false)}
+              >
+                表示を減らす
+              </button>
+            </motion.div>
+          )}
         </div>
       </section>
     </>

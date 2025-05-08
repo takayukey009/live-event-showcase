@@ -79,8 +79,13 @@ const Header = () => {
               {item === 'ACCESS' && (
                 <span className="inline-block mx-4">
                   <a
-                    href="/past-events"
+                    href="#archive"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection('archive');
+                    }}
                     className="text-white hover:text-secondary transition-colors duration-200"
+                    aria-label="過去のイベントアーカイブを見る"
                   >
                     ARCHIVE
                   </a>
@@ -134,9 +139,14 @@ const Header = () => {
                 {item === 'ACCESS' && (
                   <span className="block my-2">
                     <a
-                      href="/past-events"
+                      href="#archive"
                       className="block text-white hover:text-secondary transition-colors duration-200"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollToSection('archive');
+                        setIsMobileMenuOpen(false);
+                      }}
+                      aria-label="過去のイベントアーカイブを見る"
                     >
                       ARCHIVE
                     </a>

@@ -96,22 +96,16 @@ const PerformersSection = () => {
               
               {/* 休演表示は削除されました */}
               
-              {/* Performer name for others */}
+              {/* Performer name with description */}
               <div 
                 className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                aria-hidden="true"
               >
-                <h3 className="text-xl md:text-2xl font-display font-bold text-white">
+                <h3 className="text-xl md:text-2xl font-display font-bold text-white drop-shadow-md">
                   {performer.name}
                 </h3>
                 {performer.isGuest && (
-                  <span className="inline-block bg-secondary text-white text-xs px-2 py-1 rounded mt-2">
+                  <span className="inline-block bg-secondary text-white text-xs px-2 py-1 rounded mt-2 font-semibold" role="note">
                     GUEST
-                  </span>
-                )}
-                {performer.onBreak && performer.name !== '友田オレ' && (
-                  <span className="inline-block bg-black/70 border border-white/20 text-white/90 text-xs px-2 py-1 rounded mt-2 backdrop-blur-sm">
-                    休演
                   </span>
                 )}
               </div>
