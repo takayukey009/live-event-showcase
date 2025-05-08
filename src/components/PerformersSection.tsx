@@ -85,10 +85,10 @@ const PerformersSection = () => {
               )}
               <Image 
                 src={performer.image} 
-                alt={`${performer.name}（${performer.description ? performer.description : '出演者'}）の写真${performer.onBreak ? '（休演）' : ''}${performer.isGuest ? '（ゲスト）' : ''}`}
+                alt={`${performer.name}（${performer.description ? performer.description : '出演者'}）の写真${performer.isGuest ? '（ゲスト）' : ''}`}
                 fill
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                className={`object-cover object-center transition-transform duration-500 ${performer.onBreak ? 'grayscale brightness-40' : 'group-hover:scale-110'}`}
+                className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
               />
               
               {/* Overlay gradient for normal performers */}
@@ -99,21 +99,11 @@ const PerformersSection = () => {
                 ></div>
               )}
               
-              {/* Overlay for performers on break: just a dark overlay and "休演" */}
-              {performer.onBreak && (
-                <div 
-                  className="absolute inset-0 bg-gradient-to-br from-black/80 to-gray-900/90 flex flex-col items-center justify-center"
-                  aria-hidden="true"
-                >
-                  <div className="border border-white/30 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-md">
-                    <span className="text-white/90 font-medium tracking-wider">休演</span>
-                  </div>
-                </div>
-              )}
+              {/* 休演表示は削除されました */}
               
               {/* Performer name for others */}
               <div 
-                className={`absolute bottom-0 left-0 right-0 p-4 ${performer.onBreak ? 'translate-y-0' : 'transform translate-y-full group-hover:translate-y-0'} transition-transform duration-300`}
+                className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
                 aria-hidden="true"
               >
                 <h3 className="text-xl md:text-2xl font-display font-bold text-white">

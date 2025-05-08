@@ -28,4 +28,12 @@ export const archiveEvents: ArchiveEvent[] = [
     image: '/images/archive-3.jpg',
     link: '/archive/new-year-live'
   },
+  {
+    id: 4,
+    date: '2025.04.30',
+    title: 'YAGATE vol.22',
+    image: '/images/archive-4.jpg', // 仮の画像パス
+    link: '/archive/yagate-vol-22', // 仮のリンク
+    // 出演者情報は詳細ページやUI側で表示する場合に追加
+  },
 ];
