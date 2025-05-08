@@ -59,12 +59,7 @@ const PerformersSection = () => {
                   <div className="absolute inset-y-0 left-0 w-1/2 z-10 pointer-events-none">
                     <div className="w-full h-full grayscale brightness-40" style={{backgroundColor:'rgba(0,0,0,0.1)'}}></div>
                   </div>
-                  {/* Centered performer name (z-20) */}
-                  <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                    <span className="text-white text-2xl md:text-3xl font-bold drop-shadow-lg text-center select-none" style={{textShadow:'0 2px 6px rgba(0,0,0,0.7)'}}>
-                      {performer.name}
-                    </span>
-                  </div>
+                  {/* 中央の名前表示を削除 */}
                   {/* Note badge at bottom center (z-20) */}
                   {performer.note && (
                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
