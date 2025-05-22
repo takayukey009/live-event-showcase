@@ -9,7 +9,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // 一時的に無効化
   },
   // リダイレクト設定を修正
   async redirects() {
