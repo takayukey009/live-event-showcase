@@ -1,4 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
+// SEO対策のためのサイトマップ設定
 module.exports = {
   siteUrl: 'https://www.yagate.jp', // 本番URLに合わせて変更
   generateRobotsTxt: true, // robots.txtも自動生成
