@@ -1,17 +1,13 @@
 {
   "redirects": [
     {
-      "source": "http://yagate.jp/:path*",
-      "destination": "https://www.yagate.jp/:path*",
-      "permanent": true
-    },
-    {
-      "source": "http://www.yagate.jp/:path*",
-      "destination": "https://www.yagate.jp/:path*",
-      "permanent": true
-    },
-    {
-      "source": "https://yagate.jp/:path*",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "yagate.jp"
+        }
+      ],
       "destination": "https://www.yagate.jp/:path*",
       "permanent": true
     }
