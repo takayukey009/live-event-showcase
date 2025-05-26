@@ -28,5 +28,6 @@ export const pastEvents: PastEvent[] = [
   { volume: 'vol. 19', name: 'YAGATE vol.19', date: '2025/01/30', day: '木', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン'] },
   { volume: 'vol. 20', name: 'YAGATE vol.20', date: '2025/02/17', day: '月', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン'] },
   { volume: 'vol. 21', name: 'YAGATE vol.21', date: '2025/03/31', day: '月', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト'] },
-  { volume: 'vol. 22', name: 'YAGATE vol.22', date: '2025/04/30', day: '水', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '清水駿平', 'ベルナルド', 'おミルク'] }
+  { volume: 'vol. 22', name: 'YAGATE vol.22', date: '2025/04/30', day: '水', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '清水駿平', 'ベルナルド', 'おミルク'] },
+  { volume: 'vol. 23', name: 'YAGATE vol.23', date: '2025/05/26', day: '月', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', 'ガングリオン', 'テツロー', 'ボブのコーラ'] }
 ];
