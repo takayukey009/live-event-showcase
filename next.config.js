@@ -11,7 +11,7 @@ const nextConfig = {
   experimental: {
     // optimizeCss: true, // 一時的に無効化
   },
-  // リダイレクト設定を修正
+  // リダイレクト設定を強化
   async redirects() {
     return [
       // non-WWWからWWWへのリダイレクト
@@ -24,6 +24,17 @@ const nextConfig = {
           },
         ],
         destination: 'https://www.yagate.jp/:path*',
+        permanent: true,
+      },
+      // 古いURL形式のリダイレクトを追加
+      {
+        source: '/index.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/index.php',
+        destination: '/',
         permanent: true,
       },
     ];
