@@ -17,15 +17,15 @@ export interface LiveEvent {
 }
 
 export const currentEvent: LiveEvent = {
-  date: '2025-11-21',
-  day: '(金)',
+  date: '2025-12-23',
+  day: '(火)',
   time: '19:45',
-  venue: '新宿ハイジアV-1',
-  ticketUrl: 'https://tiget.net/events/434043',
+  venue: 'シアターミネルヴァ',
+  ticketUrl: 'https://tiget.net/events/441997',
   heroImage: '/images/hero-bg.jpg',
   eventName: 'YAGATE',
-  eventVolume: 'vol. 29',
-  description: `毎月、都内（主に新宿・下北沢）で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。 主役は、日々進化を続けるGATE所属の若手お笑い芸人、友田オレ・リンドバーグ・イクラボブチャンチャン・シャワーカーテニスト。さらに今回はゲストに「今夜も星が綺麗」「ピュート」を迎え、より一層の化学反応にご期待ください。
+  eventVolume: 'vol. 30',
+  description: `毎月、都内（主に新宿・下北沢）で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。 主役は、日々進化を続けるGATE所属の若手お笑い芸人、友田オレ・リンドバーグ・イクラボブチャンチャン・シャワーカーテニスト。さらに今回はゲストを迎え、より一層の化学反応にご期待ください。
 
 ここでしか見られない貴重な組み合わせや、この日限りの企画が、あなたの五感を刺激します。 ライブならではの熱気、画面越しでは伝わらない生の迫力、そしてブレイク前夜の才能が放つ輝きを、 ぜひ会場で体感してください。
 
@@ -33,7 +33,7 @@ export const currentEvent: LiveEvent = {
   schedule: {
     firstHalf: 'GATE所属芸人・ゲスト芸人のネタ',
     secondHalf: '企画コーナー',
-    endTime: '21:00頃 終了予定'
+    endTime: '20:45頃 終了予定'
   },
   openTime: '19:30',
 };
