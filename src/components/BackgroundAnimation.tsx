@@ -79,7 +79,13 @@ export default function BackgroundAnimation() {
     const lines: THREE.Mesh[] = []
     const triangleCount = 30
 
-    const textChars = ['笑', 'w', '草', 'ｗ', '😂']
+    const textChars = [
+      '笑', 'w', '草', 'ｗ', 'ワロタ',
+      '😂', '🤣', '😆', '😁', '😄',
+      'www', 'WWW', 'ワロス', 'ウケる',
+      '爆笑', 'lol', 'LOL', 'ww',
+      '😊', '😃', '🎉', '✨'
+    ]
     const textColors = [
       new THREE.Color(0xff6b6b), // Red
       new THREE.Color(0x4ecdc4), // Cyan
