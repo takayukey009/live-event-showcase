@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.yagate.jp
+
+# Sitemaps
+Sitemap: https://www.yagate.jp/sitemap.xml
