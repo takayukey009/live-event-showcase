@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, useAnimationControls } from 'framer-motion';
+import { motion, useAnimationControls, useScroll, useTransform } from 'framer-motion';
 import { currentEvent } from '@/data/siteConfig';
 import BackgroundAnimation from './BackgroundAnimation';
 
@@ -64,6 +64,11 @@ const HeroSection = () => {
   // アニメーション制御
   const controls = useAnimationControls();
 
+  // Parallax scrolling
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   // YAGATE文字列を分解
   const yagateLogo = ["Y", "A", "G", "A", "T", "E"];
 
@@ -106,7 +111,10 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/30 to-primary/80 z-10" aria-hidden="true"></div>
 
       {/* Content */}
-      <div className="relative z-20 h-full flex flex-col items-center justify-center text-white px-4 md:px-8">
+      <motion.div
+        className="relative z-20 h-full flex flex-col items-center justify-center text-white px-4 md:px-8"
+        style={{ y, opacity }}
+      >
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -273,7 +281,7 @@ const HeroSection = () => {
             チケットを購入する
           </motion.a>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
