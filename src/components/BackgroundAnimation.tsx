@@ -273,8 +273,10 @@ export default function BackgroundAnimation() {
         // Move down
         triangle.position.y += (triangle as any).velocity.y
 
-        // Rotate sprite
-        triangle.rotation += (triangle as any).velocity.rotZ
+        // Rotate sprite via material
+        if (triangle.material && 'rotation' in triangle.material) {
+          (triangle.material as any).rotation += (triangle as any).velocity.rotZ
+        }
 
         // Reset position when out of view
         if (triangle.position.y < -20) {
