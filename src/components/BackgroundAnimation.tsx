@@ -74,59 +74,65 @@ export default function BackgroundAnimation() {
     const cubeRenderTarget = pmremGenerator.fromScene(new THREE.Scene())
     const envMap = cubeRenderTarget.texture
 
-    // Create triangles
-    const triangles: THREE.Mesh[] = []
-    const lines: THREE.Mesh[] = []
-    const triangleCount = 30
+    // Text characters to use
+    const textChars = ['笑', 'w', '草', 'ｗ', '😂']
+    const textColors = [
+      new THREE.Color(0xff6b6b), // Red
+      new THREE.Color(0x4ecdc4), // Cyan
+      new THREE.Color(0xffe66d), // Yellow
+      new THREE.Color(0x95e1d3), // Mint
+      new THREE.Color(0xf38181), // Pink
+      new THREE.Color(0xaa96da), // Purple
+    ]
 
-    // Enhanced material with reflections
-    const triangleMaterial = new THREE.MeshPhysicalMaterial({
-      color: themeColors.secondary,
-      metalness: 0.9,
-      roughness: 0.1,
-      transparent: true,
-      opacity: 0.8,
-      side: THREE.DoubleSide,
-      envMapIntensity: 1,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
-      emissive: new THREE.Color(themeColors.secondary).multiplyScalar(0.1), // Add minimal base emissive
-      emissiveIntensity: 0.1, // Minimal emissive intensity by default
-    })
-
-    // Set the environment map for all materials
-    triangleMaterial.envMap = envMap
-
-    // Create triangular shapes
+    // Create text sprites
     for (let i = 0; i < triangleCount; i++) {
-      const geometry = new THREE.TetrahedronGeometry(Math.random() * 1.0 + 1.0, 0)
-      const triangle = new THREE.Mesh(geometry, triangleMaterial.clone())
+      // Create canvas for text
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('2d')!
+      canvas.width = 256
+      canvas.height = 256
+
+      // Random text and color
+      const text = textChars[Math.floor(Math.random() * textChars.length)]
+      const color = textColors[Math.floor(Math.random() * textColors.length)]
+
+      // Draw text on canvas
+      context.fillStyle = `rgb(${color.r * 255}, ${color.g * 255}, ${color.b * 255})`
+      context.font = 'bold 180px Arial'
+      context.textAlign = 'center'
+      context.textBaseline = 'middle'
+      context.fillText(text, 128, 128)
+
+      // Create texture from canvas
+      const texture = new THREE.CanvasTexture(canvas)
+
+      // Create sprite material
+      const spriteMaterial = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.8,
+      })
+
+      const sprite = new THREE.Sprite(spriteMaterial)
+
+      // Random size
+      const size = Math.random() * 2 + 1.5
+      sprite.scale.set(size, size, 1)
 
       // Random starting positions
-      triangle.position.x = Math.random() * 40 - 20
-      triangle.position.y = Math.random() * 40 - 20
-      triangle.position.z = Math.random() * 10 - 5
+      sprite.position.x = Math.random() * 40 - 20
+      sprite.position.y = Math.random() * 40 - 20
+      sprite.position.z = Math.random() * 10 - 5
 
-      // Random rotation
-      triangle.rotation.x = Math.random() * Math.PI
-      triangle.rotation.y = Math.random() * Math.PI
+        // Store velocity for animation
+        ; (sprite as any).velocity = {
+          y: -Math.random() * 0.03 - 0.01,
+          rotZ: Math.random() * 0.02 - 0.01,
+        }
 
-      // Store velocity for animation
-      ;(triangle as any).velocity = {
-        y: -Math.random() * 0.03 - 0.01,
-        rotX: Math.random() * 0.01 - 0.005,
-        rotY: Math.random() * 0.01 - 0.005,
-        rotZ: Math.random() * 0.01 - 0.005,
-      }
-
-      // Randomize material properties slightly for variety
-      const material = triangle.material as THREE.MeshPhysicalMaterial
-      material.color.set(new THREE.Color(themeColors.secondary).lerp(themeColors.accent, Math.random() * 0.5))
-      material.metalness = 0.7 + Math.random() * 0.3
-      material.roughness = 0.05 + Math.random() * 0.15
-
-      scene.add(triangle)
-      triangles.push(triangle)
+      scene.add(sprite)
+      triangles.push(sprite as any)
     }
 
     // Create long lines with enhanced properties
@@ -155,26 +161,26 @@ export default function BackgroundAnimation() {
       line.rotation.x = Math.random() * Math.PI * 0.1
       line.rotation.z = Math.random() * Math.PI * 0.25 // Slight angle
 
-      // Store velocity for animation
-      ;(line as any).velocity = {
-        y: -Math.random() * 0.02 - 0.01,
-        rotX: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
-        rotY: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
-        rotZ: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
-      }
+        // Store velocity for animation
+        ; (line as any).velocity = {
+          y: -Math.random() * 0.02 - 0.01,
+          rotX: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
+          rotY: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
+          rotZ: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
+        }
 
-      // Add flare properties
-      ;(line as any).flareProperties = {
-        active: false,
-        progress: 0,
-        duration: 2 + Math.random() * 3,
-        nextFlareTime: Math.random() * 10,
-      }
+        // Add flare properties
+        ; (line as any).flareProperties = {
+          active: false,
+          progress: 0,
+          duration: 2 + Math.random() * 3,
+          nextFlareTime: Math.random() * 10,
+        }
 
-      // Randomize line color slightly
-      ;(line.material as THREE.MeshPhongMaterial).color.set(
-        new THREE.Color(themeColors.accent).lerp(themeColors.highlight, Math.random() * 0.5),
-      )
+        // Randomize line color slightly
+        ; (line.material as THREE.MeshPhongMaterial).color.set(
+          new THREE.Color(themeColors.accent).lerp(themeColors.highlight, Math.random() * 0.5),
+        )
 
       scene.add(line)
       lines.push(line)
@@ -258,71 +264,13 @@ export default function BackgroundAnimation() {
       // Update time uniform for glare shader
       glarePass.uniforms.time.value = elapsedTime
 
-      // Animate triangles
+      // Animate text sprites
       triangles.forEach((triangle, index) => {
         // Move down
         triangle.position.y += (triangle as any).velocity.y
 
-        // Rotate (tumbling effect)
-        triangle.rotation.x += (triangle as any).velocity.rotX
-        triangle.rotation.y += (triangle as any).velocity.rotY
-        triangle.rotation.z += (triangle as any).velocity.rotZ
-
-        // Get the material
-        const material = triangle.material as THREE.MeshPhysicalMaterial
-
-        // IMPROVED: Calculate face normals properly for tetrahedron
-        // A tetrahedron has 4 faces, we'll check all of them against the light
-        const geometry = triangle.geometry as THREE.BufferGeometry
-        const position = geometry.attributes.position
-        const normalAttribute = geometry.attributes.normal
-
-        // Initialize variables to track the best light alignment
-        let bestAlignment = -1
-
-        // Check each face's normal against the light direction
-        for (let face = 0; face < normalAttribute.count; face++) {
-          // Get the normal for this vertex
-          const nx = normalAttribute.getX(face)
-          const ny = normalAttribute.getY(face)
-          const nz = normalAttribute.getZ(face)
-
-          // Create a normal vector and apply the triangle's rotation
-          const normal = new THREE.Vector3(nx, ny, nz).applyQuaternion(triangle.quaternion)
-
-          // Calculate light direction from this face to both lights
-          const mainLightDir = new THREE.Vector3().subVectors(mainLight.position, triangle.position).normalize()
-          const secondaryLightDir = new THREE.Vector3()
-            .subVectors(secondaryLight.position, triangle.position)
-            .normalize()
-
-          // Calculate alignment with both lights
-          const mainAlignment = Math.max(0, normal.dot(mainLightDir))
-          const secondaryAlignment = Math.max(0, normal.dot(secondaryLightDir) * 0.5) // Secondary light has less effect
-
-          // Combined alignment from both lights
-          const combinedAlignment = Math.min(1, mainAlignment + secondaryAlignment)
-
-          // Keep track of the best alignment for any face
-          if (combinedAlignment > bestAlignment) {
-            bestAlignment = combinedAlignment
-          }
-        }
-
-        // IMPROVED: Gradual emissive intensity based on alignment
-        // This prevents sudden changes from bright to dark
-        const minEmissive = 0.05 // Minimum emissive to prevent complete darkness
-        const emissiveIntensity = minEmissive + bestAlignment * 0.6
-
-        // Set emissive color based on alignment (gradual transition)
-        const emissiveColor = new THREE.Color(themeColors.glow)
-
-        // Always have some minimal emissive to prevent complete darkness
-        material.emissive.set(emissiveColor)
-        material.emissiveIntensity = emissiveIntensity
-
-        // IMPROVED: Adjust other material properties based on alignment for better visual effect
-        material.roughness = Math.max(0.05, 0.2 - bestAlignment * 0.15)
+        // Rotate sprite
+        triangle.rotation += (triangle as any).velocity.rotZ
 
         // Reset position when out of view
         if (triangle.position.y < -20) {
@@ -380,7 +328,7 @@ export default function BackgroundAnimation() {
           // Remove this line
           scene.remove(line)
           line.geometry.dispose()
-          ;(line.material as THREE.Material).dispose()
+            ; (line.material as THREE.Material).dispose()
 
           // Create a new line to replace it
           const lineLength = window.innerHeight
@@ -400,21 +348,21 @@ export default function BackgroundAnimation() {
           newLine.rotation.x = Math.random() * Math.PI * 0.1
           newLine.rotation.z = Math.random() * Math.PI * 0.25
 
-          // Store velocity for animation
-          ;(newLine as any).velocity = {
-            y: -Math.random() * 0.02 - 0.01,
-            rotX: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
-            rotY: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
-            rotZ: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
-          }
+            // Store velocity for animation
+            ; (newLine as any).velocity = {
+              y: -Math.random() * 0.02 - 0.01,
+              rotX: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
+              rotY: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
+              rotZ: (Math.random() * 0.002 - 0.001) * (Math.random() > 0.5 ? 1 : -1),
+            }
 
-          // Add flare properties
-          ;(newLine as any).flareProperties = {
-            active: false,
-            progress: 0,
-            duration: 2 + Math.random() * 3,
-            nextFlareTime: Math.random() * 10,
-          }
+            // Add flare properties
+            ; (newLine as any).flareProperties = {
+              active: false,
+              progress: 0,
+              duration: 2 + Math.random() * 3,
+              nextFlareTime: Math.random() * 10,
+            }
 
           scene.add(newLine)
           lines[index] = newLine
@@ -448,12 +396,12 @@ export default function BackgroundAnimation() {
       // Dispose geometries and materials
       triangles.forEach((triangle) => {
         triangle.geometry.dispose()
-        ;(triangle.material as THREE.Material).dispose()
+          ; (triangle.material as THREE.Material).dispose()
       })
 
       lines.forEach((line) => {
         line.geometry.dispose()
-        ;(line.material as THREE.Material).dispose()
+          ; (line.material as THREE.Material).dispose()
       })
 
       composer.dispose()
