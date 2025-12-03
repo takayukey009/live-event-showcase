@@ -75,6 +75,10 @@ export default function BackgroundAnimation() {
     const envMap = cubeRenderTarget.texture
 
     // Text characters to use
+    const triangles: THREE.Sprite[] = []
+    const lines: THREE.Mesh[] = []
+    const triangleCount = 30
+
     const textChars = ['笑', 'w', '草', 'ｗ', '😂']
     const textColors = [
       new THREE.Color(0xff6b6b), // Red
