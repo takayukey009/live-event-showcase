@@ -25,7 +25,7 @@ const PerformersSection = () => {
   return (
     <section id="performers" className="py-16 px-4 md:px-8 bg-light dark:bg-dark">
       <div className="max-w-7xl mx-auto">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -34,8 +34,8 @@ const PerformersSection = () => {
         >
           PERFORMERS / LINE UP
         </motion.h2>
-        
-        <motion.div 
+
+        <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -45,19 +45,23 @@ const PerformersSection = () => {
           aria-label="出演者一覧"
         >
           {performers.map((performer) => (
-            <motion.div 
+            <motion.div
               key={performer.id}
               variants={item}
               className="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-lg"
               role="listitem"
               aria-label={`${performer.name}${performer.isGuest ? ' (ゲスト)' : ''}${performer.onBreak ? ' (休演)' : ''}`}
+              whileHover={{
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
             >
               {/* Special: Left grayscale for イクラボブチャンチャン */}
               {performer.name === 'イクラボブチャンチャン' && (
                 <>
                   {/* Left half grayscale overlay (z-10) */}
                   <div className="absolute inset-y-0 left-0 w-1/2 z-10 pointer-events-none">
-                    <div className="w-full h-full grayscale brightness-40" style={{backgroundColor:'rgba(0,0,0,0.1)'}}></div>
+                    <div className="w-full h-full grayscale brightness-40" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }}></div>
                   </div>
                   {/* 中央の名前表示を削除 */}
                   {/* Note badge at bottom center (z-20) */}
@@ -78,26 +82,26 @@ const PerformersSection = () => {
                   </span>
                 </div>
               )}
-              <Image 
-                src={performer.image} 
+              <Image
+                src={performer.image}
                 alt={`${performer.name}（${performer.description ? performer.description : '出演者'}）の写真${performer.isGuest ? '（ゲスト）' : ''}`}
                 fill
                 sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 className="object-cover object-center transition-transform duration-500 group-hover:scale-110"
               />
-              
+
               {/* Overlay gradient for normal performers */}
               {!performer.onBreak && (
-                <div 
+                <div
                   className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   aria-hidden="true"
                 ></div>
               )}
-              
+
               {/* 休演表示は削除されました */}
-              
+
               {/* Performer name with description */}
-              <div 
+              <div
                 className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
               >
                 <h3 className="text-xl md:text-2xl font-display font-bold text-white drop-shadow-md">
