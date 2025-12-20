@@ -184,7 +184,7 @@ const HeroSection = () => {
             </motion.h1>
           )}
 
-          <motion.h1
+          <motion.h2
             className="text-4xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-2"
             initial={{ opacity: 0, y: 30 }}
             animate={{
@@ -200,7 +200,7 @@ const HeroSection = () => {
             }}
           >
             {currentEvent.date} {currentEvent.day}
-          </motion.h1>
+          </motion.h2>
 
           <motion.div
             className="flex flex-col items-center space-y-1 mb-2"
