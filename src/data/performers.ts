@@ -13,5 +13,6 @@ export const performers: Performer[] = [
   { id: 2, name: 'リンドバーグ', image: '/images/performer-2.jpg', isGuest: false, description: '注目若手芸人' },
   { id: 3, name: 'イクラボブチャンチャン', image: '/images/performer-3.jpg', isGuest: false, description: '個性派コンビ' },
   { id: 4, name: 'シャワーカーテニスト', image: '/images/performer-4.jpg', isGuest: false, description: '新進気鋭の芸人' },
-  { id: 5, name: 'GUEST（未定）', image: '/images/coming-soon.jpg', isGuest: true, description: 'ゲスト芸人' },
+  { id: 5, name: 'ラニーノーズ', image: '/images/lanynose.jpg', isGuest: true, description: 'ゲスト芸人' },
+  { id: 6, name: 'たつろう', image: '/images/tatsuro.jpg', isGuest: true, description: 'ゲスト芸人' },
 ];
