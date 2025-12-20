@@ -1,3 +1,4 @@
+// Restoration of SEO Improvements (Fixed Grid UI)
 import type { Metadata } from 'next'
 import { currentEvent } from '@/data/siteConfig'
 import { performers } from '@/data/performers'
