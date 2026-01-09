@@ -21,7 +21,7 @@ export const currentEvent: LiveEvent = {
   day: '(月)',
   time: '19:45',
   venue: 'ハイジアV-1',
-  ticketUrl: 'https://tiget.net/events/441997',
+  ticketUrl: 'https://tiget.net/events/452716',
   heroImage: '/images/hero-bg.jpg',
   eventName: 'YAGATE',
   eventVolume: 'vol. 31',
