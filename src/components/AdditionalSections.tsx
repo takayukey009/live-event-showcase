@@ -198,21 +198,21 @@ const AdditionalSections = () => {
               variants={fadeInUp}
               className="bg-white dark:bg-primary/20 p-6 rounded-lg shadow-md"
             >
-              <h3 className="text-xl font-bold mb-4">下北沢シアターミネルヴァ</h3>
-              <p className="mb-2"><span className="font-medium">住所:</span> 〒155-0031 東京都世田谷区北沢2丁目7-14</p>
-              <p className="mb-6"><span className="font-medium">アクセス:</span> 小田急線・京王井の頭線 下北沢駅 東口から徒歩2分</p>
+              <h3 className="text-xl font-bold mb-4">新宿ハイジアV-1</h3>
+              <p className="mb-2"><span className="font-medium">住所:</span> 〒160-0021 東京都新宿区歌舞伎町2-44-1 ハイジアB1</p>
+              <p className="mb-6"><span className="font-medium">アクセス:</span> 西武新宿線 西武新宿駅 北口より徒歩2分 / JR新宿駅 東口より徒歩7分</p>
 
               <div className="aspect-video relative rounded-lg overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.1234567890!2d139.6677!3d35.6612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018f4d9c9c9c9c9%3A0x1234567890abcdef!2z5LiL5YyX5rKi44K344Ki44K_44O844Of44ON44Or44O044Kh!5e0!3m2!1sja!2sjp!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.4!2d139.7012!3d35.6975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d2f5e4f1b1f%3A0x5e4f1b1f5e4f1b1f!2z44OP44Kk44K444KiVi0x!5e0!3m2!1sja!2sjp!4v1704800000000"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="下北沢シアターミネルヴァの地図"
-                  aria-label="下北沢シアターミネルヴァの地図 - 東京都世田谷区北沢2-7-14"
+                  title="新宿ハイジアV-1の地図"
+                  aria-label="新宿ハイジアV-1の地図 - 東京都新宿区歌舞伎町2-44-1"
                 ></iframe>
               </div>
             </motion.div>

@@ -35,5 +35,6 @@ export const pastEvents: PastEvent[] = [
   { volume: 'vol. 26', name: 'YAGATE vol.26', date: '2025/08/25', day: '月', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', 'ド桜', 'あなたとネ'] },
   { volume: 'vol. 27', name: 'YAGATE vol.27', date: '2025/09/30', day: '月', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '大王', 'サツマカワRPG'] },
   { volume: 'vol. 28', name: 'YAGATE vol.28', date: '2025/10/31', day: '金', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '軟水', 'カナメストーン'] },
-  { volume: 'vol. 29', name: 'YAGATE vol.29', date: '2025/11/21', day: '金', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '今夜も星が綺麗', 'ピュート'] }
+  { volume: 'vol. 29', name: 'YAGATE vol.29', date: '2025/11/21', day: '金', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '今夜も星が綺麗', 'ピュート'] },
+  { volume: 'vol. 30', name: 'YAGATE vol.30', date: '2025/12/23', day: '火', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '金魚番長', '無尽蔵'] }
 ];

@@ -71,10 +71,10 @@ export default function RootLayout({
                 name: currentEvent.venue,
                 address: {
                   "@type": "PostalAddress",
-                  "addressLocality": "東京都世田谷区",
+                  "addressLocality": "東京都新宿区",
                   "addressRegion": "東京都",
-                  "postalCode": "155-0031",
-                  "streetAddress": "北沢2-7-14 下北沢シアターミネルヴァ"
+                  "postalCode": "160-0021",
+                  "streetAddress": "歌舞伎町2-44-1 ハイジアB1"
                 }
               },
               image: [
