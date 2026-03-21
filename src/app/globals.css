@@ -2,40 +2,157 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   YAGATE LIVE - Dark × Neon Design System
+   ============================================ */
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 247, 247, 247;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 10, 10, 15;
+  --neon-pink: #e94560;
+  --neon-cyan: #00f0ff;
+  --neon-purple: #a855f7;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 26, 26, 46;
-    --background-end-rgb: 22, 33, 62;
-  }
-}
-
+/* ---- Base Styles ---- */
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: 'Outfit', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(233, 69, 96, 0.4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(233, 69, 96, 0.7);
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(233, 69, 96, 0.3);
+  color: white;
+}
+
+/* ---- Layer Components ---- */
 @layer components {
+  /* ---------- Buttons ---------- */
   .btn-primary {
-    @apply bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg;
+    @apply relative inline-flex items-center justify-center font-bold py-4 px-8 rounded-full text-white transition-all duration-300 transform hover:scale-105;
+    background: linear-gradient(135deg, #e94560, #d63355);
+    box-shadow: 0 0 20px rgba(233, 69, 96, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
   }
-  
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(233, 69, 96, 0.6), 0 0 60px rgba(233, 69, 96, 0.2), 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-secondary {
+    @apply relative inline-flex items-center justify-center font-bold py-3 px-6 rounded-full text-white transition-all duration-300 transform hover:scale-105 border;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(233, 69, 96, 0.4);
+    backdrop-filter: blur(10px);
+  }
+  .btn-secondary:hover {
+    background: rgba(233, 69, 96, 0.15);
+    border-color: rgba(233, 69, 96, 0.8);
+    box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
+  }
+
+  /* ---------- Headings ---------- */
   .section-heading {
-    @apply text-3xl md:text-4xl font-display font-bold text-primary dark:text-white mb-8 relative;
+    @apply text-4xl md:text-5xl font-display font-bold text-white mb-8 relative tracking-tight;
   }
-  
   .section-heading::after {
-    @apply content-[''] absolute bottom-0 left-0 w-16 h-1 bg-secondary;
+    @apply content-[''] absolute -bottom-3 left-0 h-1 rounded-full;
+    width: 60px;
+    background: linear-gradient(90deg, #e94560, #00f0ff);
   }
+  .section-heading-center {
+    @apply text-4xl md:text-5xl font-display font-bold text-white mb-8 relative text-center tracking-tight;
+  }
+  .section-heading-center::after {
+    @apply content-[''] absolute -bottom-3 left-1/2 -translate-x-1/2 h-1 rounded-full;
+    width: 60px;
+    background: linear-gradient(90deg, #e94560, #00f0ff);
+  }
+
+  /* ---------- Glass Card ---------- */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ---------- Neon Text ---------- */
+  .text-neon-pink {
+    color: #e94560;
+    text-shadow: 0 0 10px rgba(233, 69, 96, 0.5), 0 0 20px rgba(233, 69, 96, 0.2);
+  }
+  .text-neon-cyan {
+    color: #00f0ff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.2);
+  }
+
+  /* ---------- Divider ---------- */
+  .section-divider {
+    @apply w-full h-px;
+    background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.3), rgba(0, 240, 255, 0.3), transparent);
+  }
+
+  /* ---------- Badge ---------- */
+  .badge-guest {
+    @apply inline-block text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider;
+    background: linear-gradient(135deg, #e94560, #a855f7);
+    box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+  }
+}
+
+/* ---- Neon Glow Keyframes (CSS-only fallback) ---- */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px var(--neon-pink),
+      0 0 80px var(--neon-pink);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+/* ---- Gradient Mesh Background ---- */
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(233, 69, 96, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 240, 255, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 60%),
+    rgb(var(--background-rgb));
 }
