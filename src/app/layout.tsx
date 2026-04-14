@@ -71,10 +71,10 @@ export default function RootLayout({
                 name: currentEvent.venue,
                 address: {
                   "@type": "PostalAddress",
-                  "addressLocality": "東京都渋谷区",
+                  "addressLocality": "東京都新宿区",
                   "addressRegion": "東京都",
-                  "postalCode": "150-0031",
-                  "streetAddress": "桜丘町23-21 渋谷区文化総合センター大和田"
+                  "postalCode": "160-0021",
+                  "streetAddress": "歌舞伎町2-44-1 ハイジアB1"
                 }
               },
               image: [
@@ -93,7 +93,7 @@ export default function RootLayout({
               offers: {
                 "@type": "Offer",
                 url: currentEvent.ticketUrl,
-                price: "2500",
+                price: "1500",
                 priceCurrency: "JPY",
                 availability: "https://schema.org/InStock",
                 validFrom: "2024-12-01T12:00",

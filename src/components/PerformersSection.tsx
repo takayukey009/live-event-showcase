@@ -26,6 +26,65 @@ const PerformersSection = () => {
   const regularPerformers = performers.filter(p => !p.isGuest);
   const guestPerformers = performers.filter(p => p.isGuest);
 
+  // 共通のカードコンポーネント
+  const PerformerCard = ({ performer, isGuest = false }: { performer: typeof performers[0]; isGuest?: boolean }) => (
+    <motion.div
+      key={performer.id}
+      variants={item}
+      className="relative group"
+      role="listitem"
+      aria-label={performer.name}
+    >
+      {/* Card */}
+      <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/5 transition-all duration-500 group-hover:border-secondary/30">
+        {/* Image */}
+        <Image
+          src={performer.image}
+          alt={`${performer.name}（${performer.description || '出演者'}）の写真`}
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="object-cover object-center transition-all duration-700 group-hover:scale-110"
+        />
+
+        {/* Guest badge */}
+        {isGuest && (
+          <div className="absolute top-3 left-3 z-20">
+            <span className="inline-block bg-secondary/90 text-white text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm">
+              GUEST
+            </span>
+          </div>
+        )}
+
+        {/* Note badge */}
+        {performer.note && (
+          <div className="absolute top-3 left-3 z-20">
+            <span className="inline-block bg-secondary/90 text-white text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm">
+              {performer.note}
+            </span>
+          </div>
+        )}
+
+        {/* Gradient overlay - always visible on bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/10 to-transparent" aria-hidden="true" />
+
+        {/* Hover glow overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-secondary/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
+
+        {/* Performer name - always visible at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <h3 className="text-lg md:text-xl font-display font-bold text-white drop-shadow-lg">
+            {performer.name}
+          </h3>
+          {performer.description && (
+            <p className="text-xs text-white/50 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {performer.description}
+            </p>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+
   return (
     <section id="performers" className="relative py-20 px-4 md:px-8 bg-primary overflow-hidden">
       {/* Background decoration */}
@@ -36,70 +95,32 @@ const PerformersSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* SPECIAL GUEST セクション */}
+        {/* GUEST セクション */}
         {guestPerformers.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mb-20"
-          >
+          <>
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-center mb-10"
             >
-              <span className="inline-block text-xs uppercase tracking-[0.4em] text-secondary/80 mb-2">
-                ✦ Special Guest ✦
-              </span>
-              <h2 className="section-heading-center">GUEST</h2>
+              <h2 className="section-heading">GUEST</h2>
             </motion.div>
 
-            <div className="flex justify-center">
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 mb-16"
+              role="list"
+              aria-label="ゲスト出演者"
+            >
               {guestPerformers.map((performer) => (
-                <motion.div
-                  key={performer.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-full max-w-lg group"
-                >
-                  {/* Glow ring */}
-                  <div className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: 'linear-gradient(135deg, #e94560, #a855f7, #00f0ff)', filter: 'blur(15px)' }}
-                  />
-
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10">
-                    <Image
-                      src={performer.image}
-                      alt={`${performer.name}（${performer.description || 'スペシャルゲスト'}）`}
-                      fill
-                      sizes="(max-width: 768px) 90vw, 500px"
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                      priority
-                    />
-
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent" />
-
-                    {/* Guest info */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                      <div className="badge-guest mb-3">SPECIAL GUEST</div>
-                      <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
-                        {performer.name}
-                      </h3>
-                      {performer.description && (
-                        <p className="text-white/60 text-sm md:text-base">{performer.description}</p>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
+                <PerformerCard key={performer.id} performer={performer} isGuest={true} />
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
 
         {/* LINE UP */}
@@ -122,52 +143,7 @@ const PerformersSection = () => {
           aria-label="出演者一覧"
         >
           {regularPerformers.map((performer) => (
-            <motion.div
-              key={performer.id}
-              variants={item}
-              className="relative group"
-              role="listitem"
-              aria-label={`${performer.name}${performer.onBreak ? ' (休演)' : ''}`}
-            >
-              {/* Card */}
-              <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/5 transition-all duration-500 group-hover:border-secondary/30">
-                {/* Image */}
-                <Image
-                  src={performer.image}
-                  alt={`${performer.name}（${performer.description || '出演者'}）の写真`}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover object-center transition-all duration-700 group-hover:scale-110"
-                />
-
-                {/* Note badge */}
-                {performer.note && (
-                  <div className="absolute top-3 left-3 z-20">
-                    <span className="inline-block bg-secondary/90 text-white text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm">
-                      {performer.note}
-                    </span>
-                  </div>
-                )}
-
-                {/* Gradient overlay - always visible on bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/10 to-transparent" aria-hidden="true" />
-
-                {/* Hover glow overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-secondary/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
-
-                {/* Performer name - always visible at bottom */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="text-lg md:text-xl font-display font-bold text-white drop-shadow-lg">
-                    {performer.name}
-                  </h3>
-                  {performer.description && (
-                    <p className="text-xs text-white/50 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {performer.description}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+            <PerformerCard key={performer.id} performer={performer} />
           ))}
         </motion.div>
       </div>
