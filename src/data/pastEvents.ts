@@ -40,4 +40,5 @@ export const pastEvents: PastEvent[] = [
   { volume: 'vol. 31', name: 'YAGATE vol.31', date: '2026/01/26', day: '月', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '金魚番長', '無尽蔵'] },
   { volume: 'vol. 32', name: 'YAGATE vol.32', date: '2026/02/20', day: '金', performers: ['リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '兄弟', '百恵'] },
   { volume: 'vol. 33', name: 'YAGATE vol.33 -SPECIAL-', date: '2026/03/15', day: '日', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', 'ハリセンボン'] },
+  { volume: 'vol. 34', name: 'YAGATE vol.34', date: '2026/04/21', day: '火', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', 'ケビンス', 'お抹茶'] },
 ];

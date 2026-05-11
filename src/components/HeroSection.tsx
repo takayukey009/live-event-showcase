@@ -86,12 +86,13 @@ const HeroSection = () => {
 
   const yagateLogo = ["Y", "A", "G", "A", "T", "E"];
 
-  // カウントダウン
-  const [countdown, setCountdown] = useState(
-    getTimeRemaining(currentEvent.date, currentEvent.time)
-  );
+  // カウントダウン（hydrationエラー回避のため初期値は固定）
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0, isOver: false });
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    setCountdown(getTimeRemaining(currentEvent.date, currentEvent.time));
     const timer = setInterval(() => {
       setCountdown(getTimeRemaining(currentEvent.date, currentEvent.time));
     }, 1000);
@@ -235,7 +236,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Countdown Timer */}
-          {!countdown.isOver && (
+          {isMounted && !countdown.isOver && (
             <motion.div
               className="flex items-center justify-center gap-2 md:gap-4 mb-8"
               initial={{ opacity: 0, y: 30 }}
