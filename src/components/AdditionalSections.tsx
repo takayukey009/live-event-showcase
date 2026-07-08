@@ -204,6 +204,24 @@ const AdditionalSections = () => {
               </>
             )}
           </motion.div>
+
+          {/* 動画プレイヤー */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-12 max-w-3xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl glass-card aspect-video relative group"
+          >
+            <video
+              src="/ASdM_abCBHLIOmHo.mp4"
+              controls
+              className="w-full h-full object-cover"
+              poster={currentEvent.heroImage}
+              preload="metadata"
+              playsInline
+            />
+          </motion.div>
         </div>
       </section>
 
