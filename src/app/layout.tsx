@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: `YAGATE LIVE ${currentEvent.eventVolume} | 友田オレ出演・${currentEvent.date}`,
     description: `${currentEvent.date}開催YAGATE LIVE ${currentEvent.eventVolume}。${performers.map(p => p.name).join('、')}他出演。`,
-    url: 'https://yagate-live.vercel.app',
+    url: 'https://www.yagate.jp',
     siteName: 'YAGATE LIVE',
     images: [
       {
-        url: 'https://yagate-live.vercel.app/images/og-image.jpg',
+        url: 'https://www.yagate.jp/images/og-image.jpg',
         width: 1200,
         height: 630,
         alt: `YAGATE LIVE ${currentEvent.eventVolume} 友田オレ出演イベント画像`,
@@ -28,17 +28,17 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `YAGATE LIVE ${currentEvent.eventVolume} | 友田オレ出演・${currentEvent.date}`,
     description: `YAGATE LIVE ${currentEvent.eventVolume}のチケット情報はこちら。出演：${performers.slice(0, 5).map(p => p.name).join(', ')}他。`,
-    images: ['https://yagate-live.vercel.app/images/og-image.jpg'],
+    images: ['https://www.yagate.jp/images/og-image.jpg'],
     creator: '@gate_yagate',
   },
   alternates: {
-    canonical: 'https://yagate-live.vercel.app',
+    canonical: 'https://www.yagate.jp',
   },
   other: {
     'line:card': 'summary_large_image',
     'line:title': `YAGATE LIVE ${currentEvent.eventVolume} | 友田オレ出演・${currentEvent.date}`,
     'line:description': `YAGATE LIVE ${currentEvent.eventVolume} (${currentEvent.date}) の情報。`,
-    'line:image': 'https://yagate-live.vercel.app/images/og-image.jpg',
+    'line:image': 'https://www.yagate.jp/images/og-image.jpg',
   },
 }
 
@@ -78,13 +78,13 @@ export default function RootLayout({
                 }
               },
               image: [
-                "https://yagate-live.vercel.app/images/og-image.jpg"
+                "https://www.yagate.jp/images/og-image.jpg"
               ],
               description: currentEvent.description?.split('\n')[0] || '',
               organizer: {
                 "@type": "Organization",
                 name: "GATE",
-                url: "https://yagate-live.vercel.app"
+                url: "https://www.yagate.jp"
               },
               performer: performers.map(p => ({
                 "@type": "Person",

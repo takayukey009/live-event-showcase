@@ -39,14 +39,19 @@ const nextConfig = {
       },
     ];
   },
-  // トップページにアクセスした際にyagate-vol37.htmlを表示する設定
+  // トップページで yagate-vol37.html を直接配信する（JSリダイレクト不要・SEOに有利）
+  // beforeFiles にすることで app/page.tsx より先に静的ファイルが返る
   async rewrites() {
-    return [
-      {
-        source: '/',
-        destination: '/yagate-vol37.html',
-      },
-    ];
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          destination: '/yagate-vol37.html',
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
   },
 }
 module.exports = nextConfig

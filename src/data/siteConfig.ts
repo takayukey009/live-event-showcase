@@ -44,12 +44,10 @@ GATE所属芸人が、ネタ＋企画コーナーを行うライブです！
 
 export const siteConfig = {
   siteName: 'YAGATE LIVE',
-  description: '最高のライブ体験をお届けするエンターテイメントプラットフォーム',
-  contactEmail: 'info@liveshowcase.jp',
-  contactPhone: '03-XXXX-XXXX',
+  description: 'GATE事務所お笑いライブ「YAGATE」公式サイト',
+  contactEmail: 'takayuki.togawa@gate-agency.com',
   socialLinks: {
-    twitter: 'https://twitter.com/liveshowcase',
-    instagram: 'https://instagram.com/liveshowcase',
-    youtube: 'https://youtube.com/liveshowcase',
+    twitter: 'https://x.com/gate_yagate',
+    instagram: 'https://www.instagram.com/gate_talentagency/',
   }
 };
