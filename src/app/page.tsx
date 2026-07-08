@@ -4,15 +4,18 @@ import HeroSection from '@/components/HeroSection';
 import PerformersSection from '@/components/PerformersSection';
 import AdditionalSections from '@/components/AdditionalSections';
 import SNSFeed from '@/components/SNSFeed';
+import ClientShell from '@/components/ClientShell';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Header />
-      <HeroSection />
-      <PerformersSection />
-      <AdditionalSections />
-      <SNSFeed />
+      <ClientShell>
+        <Header />
+        <HeroSection />
+        <PerformersSection />
+        <AdditionalSections />
+        <SNSFeed />
+      </ClientShell>
     </main>
   );
 }
