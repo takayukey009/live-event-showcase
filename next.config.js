@@ -39,5 +39,14 @@ const nextConfig = {
       },
     ];
   },
+  // トップページにアクセスした際にyagate-vol37.htmlを表示する設定
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/yagate-vol37.html',
+      },
+    ];
+  },
 }
 module.exports = nextConfig
