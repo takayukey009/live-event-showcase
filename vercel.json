@@ -21,5 +21,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/yagate-vol37.html"
+    }
   ]
 }
