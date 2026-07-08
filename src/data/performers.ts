@@ -16,4 +16,6 @@ export const performers: Performer[] = [
   { id: 5, name: '深海魚', image: '/images/深海魚.jpg', isGuest: false },
   { id: 6, name: 'リバーサイドマエストロ', image: '/images/リバーサイドマエストロ.jpg', isGuest: false },
   { id: 7, name: '一向聴', image: '/images/一向聴.jpg', isGuest: false },
+  { id: 8, name: 'チェット', image: '/images/YYY_0864のコピー-scaled.jpg', isGuest: false },
+  { id: 9, name: '無尽蔵', image: '/images/63a98a04-e4b0-48a1-b195-73e3ac1f27de.jpg', isGuest: true },
 ];

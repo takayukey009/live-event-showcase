@@ -18,15 +18,18 @@ export interface LiveEvent {
 }
 
 export const currentEvent: LiveEvent = {
-  date: '2026-05-25',
+  date: '2026-07-27',
   day: '(月)',
-  time: '19:35',
+  time: '19:30',
   venue: '新宿ハイジアV-1',
-  ticketUrl: '',
+  ticketUrl: 'https://tiget.net/events/503187',
   heroImage: '/images/hero-bg-vol35.jpg',
   eventName: 'YAGATE',
-  eventVolume: 'vol. 35',
-  description: `毎月、都内（主に新宿・下北沢）で開催されるGATEがお届けする若手お笑いライブ「YAGATE」。今回は友田オレ・リンドバーグ・イクラボブチャンチャン・シャワーカーテニスト・深海魚・リバーサイドマエストロ・一向聴の7組が出演。それぞれの個性がぶつかり合う化学反応にご期待ください。
+  eventVolume: 'vol. 37',
+  description: `GATE事務所ライブ「YAGATE」
+GATE所属芸人が、ネタ＋企画コーナーを行うライブです！
+
+友田オレ・リンドバーグ・イクラボブチャンチャン・シャワーカーテニスト・深海魚・リバーサイドマエストロ・一向聴・チェットの8組が出演。ゲストには無尽蔵を迎え、それぞれの個性がぶつかり合う化学反応にご期待ください。
 
 ここでしか見られない貴重な組み合わせや、この日限りの企画が、あなたの五感を刺激します。ライブならではの熱気、画面越しでは伝わらない生の迫力、そしてブレイク前夜の才能が放つ輝きを、ぜひ会場で体感してください。
 
@@ -36,7 +39,7 @@ export const currentEvent: LiveEvent = {
     secondHalf: '企画コーナー',
     endTime: '20:45頃 終了予定'
   },
-  openTime: '19:20',
+  openTime: '19:15',
 };
 
 export const siteConfig = {
