@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export default function Home() {
   useEffect(() => {
-    window.location.replace('/yagate-vol37.html');
+    window.location.replace('/yagate-vol38.html');
   }, []);
 
   return (

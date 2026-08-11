@@ -41,4 +41,7 @@ export const pastEvents: PastEvent[] = [
   { volume: 'vol. 32', name: 'YAGATE vol.32', date: '2026/02/20', day: '金', performers: ['リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '兄弟', '百恵'] },
   { volume: 'vol. 33', name: 'YAGATE vol.33 -SPECIAL-', date: '2026/03/15', day: '日', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', 'ハリセンボン'] },
   { volume: 'vol. 34', name: 'YAGATE vol.34', date: '2026/04/21', day: '火', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', 'ケビンス', 'お抹茶'] },
+  { volume: 'vol. 35', name: 'YAGATE vol.35', date: '2026/05/25', day: '月', performers: ['友田オレ', 'リンドバーグ舛谷', 'イクラボブチャンチャン', 'シャワーカーテニスト', '深海魚', 'リバーサイドマエストロ', '一向聴'] },
+  { volume: 'vol. 36', name: 'YAGATE vol.36', date: '2026/06/23', day: '火', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '深海魚', 'リバーサイドマエストロ', '一向聴'] },
+  { volume: 'vol. 37', name: 'YAGATE vol.37', date: '2026/07/27', day: '月', performers: ['友田オレ', 'リンドバーグ', 'イクラボブチャンチャン', 'シャワーカーテニスト', '深海魚', 'リバーサイドマエストロ', '一向聴', 'チェット', '無尽蔵'] },
 ];

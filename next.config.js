@@ -46,7 +46,7 @@ const nextConfig = {
       beforeFiles: [
         {
           source: '/',
-          destination: '/yagate-vol37.html',
+          destination: '/yagate-vol38.html',
         },
       ],
       afterFiles: [],
