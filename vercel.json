@@ -13,7 +13,7 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "DENY"
+          "value": "SAMEORIGIN"
         },
         {
           "key": "X-XSS-Protection",
@@ -25,6 +25,18 @@
   "rewrites": [
     {
       "source": "/",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/portal",
+      "destination": "/portal.html"
+    },
+    {
+      "source": "/mtg",
+      "destination": "/mtg-presentation.html"
+    },
+    {
+      "source": "/showcase",
       "destination": "/yagate-vol37.html"
     }
   ]
