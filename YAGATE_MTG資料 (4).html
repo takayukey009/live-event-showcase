@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAGATE 定例MTG資料</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#3E6AE1;--carbon:#171A20;--graphite:#393C41;--pewter:#5C5E62;
+  --silver:#8E8E8E;--cloud:#EEEEEE;--pale:#D0D1D2;--ash:#F4F4F4;--white:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"Inter","Noto Sans JP",-apple-system,"Hiragino Sans",Arial,sans-serif;
+  font-size:14px;font-weight:400;line-height:1.43;color:var(--graphite);background:var(--white);
+  -webkit-font-smoothing:antialiased;
+}
+.num{font-family:"Inter",-apple-system,Arial,sans-serif;font-variant-numeric:tabular-nums;}
+
+.nav{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;background:rgba(255,255,255,.75);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.wordmark{font-size:14px;font-weight:500;letter-spacing:.42em;color:var(--carbon);}
+.navlinks{display:flex;gap:4px;}
+.navlinks a{
+  font-size:14px;font-weight:500;color:var(--carbon);text-decoration:none;
+  padding:4px 16px;border-radius:4px;min-height:32px;display:flex;align-items:center;
+  transition:color .33s,background-color .33s;
+}
+.navlinks a:hover{background:var(--ash);}
+.navdate{font-size:14px;color:var(--pewter);}
+
+section{padding:120px 32px;max-width:1383px;margin:0 auto;}
+.section-full{min-height:100vh;display:flex;flex-direction:column;justify-content:center;}
+.eyebrow{font-size:14px;font-weight:500;color:var(--blue);margin-bottom:24px;}
+h1{font-size:40px;font-weight:500;line-height:1.2;color:var(--carbon);}
+h2{font-size:40px;font-weight:500;line-height:1.2;color:var(--carbon);margin-bottom:24px;}
+h3{font-size:17px;font-weight:500;line-height:1.18;color:var(--carbon);margin-bottom:8px;}
+.lede{font-size:14px;line-height:1.43;color:var(--graphite);max-width:660px;}
+p+p{margin-top:16px;}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 32px;}
+.hero-title{font-size:40px;font-weight:500;letter-spacing:.32em;color:var(--carbon);margin-bottom:16px;}
+.hero-sub{font-size:22px;color:var(--graphite);margin-bottom:8px;}
+.hero-meta{font-size:14px;color:var(--pewter);margin-bottom:48px;}
+.cta-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;min-height:40px;width:200px;
+  border-radius:4px;font-size:14px;font-weight:500;text-decoration:none;
+  border:3px solid transparent;cursor:pointer;
+  transition:border-color .33s,background-color .33s,color .33s;
+}
+.btn-primary{background:var(--blue);color:var(--white);}
+.btn-primary:hover{background:#3559bd;}
+.btn-secondary{background:var(--white);color:var(--graphite);border-color:var(--pale);}
+.btn-secondary:hover{border-color:var(--carbon);}
+
+.stat-stage{background:var(--ash);border-radius:12px;overflow:hidden;padding:80px 48px;margin:48px 0;}
+.stat-stage.dark{background:var(--carbon);}
+.stat-stage.dark .stat-label{color:var(--pale);}
+.stat-stage.dark .stat-figure{color:var(--white);}
+.stat-stage.dark .stat-unit,.stat-stage.dark .stat-note{color:var(--pale);}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px;}
+.stat-grid.three{grid-template-columns:repeat(3,1fr);}
+.stat-label{font-size:14px;color:var(--pewter);margin-bottom:8px;}
+.stat-figure{font-size:60px;font-weight:400;line-height:1;color:var(--carbon);letter-spacing:-.01em;}
+.stat-figure.neg{color:var(--carbon);}
+.stat-unit{font-size:22px;color:var(--pewter);margin-left:4px;}
+.stat-note{font-size:14px;color:var(--silver);margin-top:8px;}
+
+.compare{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0;}
+.compare-card{background:var(--ash);border-radius:12px;padding:40px 32px;}
+.compare-card.lead{background:var(--carbon);}
+.compare-card.lead .cc-vol,.compare-card.lead .cc-big,.compare-card.lead .cc-row span:last-child{color:var(--white);}
+.compare-card.lead .cc-row span:first-child,.compare-card.lead .cc-label{color:var(--pale);}
+.compare-card.lead .cc-row{border-color:rgba(255,255,255,.18);}
+.cc-vol{font-size:17px;font-weight:500;color:var(--carbon);margin-bottom:24px;}
+.cc-label{font-size:14px;color:var(--pewter);}
+.cc-big{font-size:52px;font-weight:400;line-height:1;color:var(--carbon);margin-bottom:24px;}
+.cc-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--pale);font-size:14px;}
+.cc-row:last-child{border-bottom:none;}
+.cc-row span:first-child{color:var(--pewter);}
+.cc-row span:last-child{color:var(--carbon);font-weight:500;}
+.hit{color:var(--blue) !important;font-weight:500;}
+
+table{width:100%;border-collapse:collapse;margin:32px 0;font-size:14px;}
+th{text-align:left;font-weight:500;color:var(--pewter);padding:12px 16px;border-bottom:1px solid var(--pale);}
+th.r{text-align:right;}
+td{padding:16px;border-bottom:1px solid var(--cloud);color:var(--graphite);}
+td.k{color:var(--carbon);font-weight:500;}
+td.r{text-align:right;}
+tr.hl td{background:var(--ash);}
+.pos{color:var(--blue);font-weight:500;}
+
+.bars{margin:48px 0;}
+.bar-row{display:flex;align-items:center;gap:16px;padding:12px 0;}
+.bar-name{width:110px;flex-shrink:0;font-size:14px;color:var(--carbon);font-weight:500;}
+.bar-track{flex:1;height:8px;background:var(--cloud);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--pale);border-radius:4px;}
+.bar-fill.on{background:var(--blue);}
+.bar-val{width:190px;flex-shrink:0;text-align:right;font-size:14px;color:var(--pewter);}
+
+.sim{background:var(--carbon);border-radius:12px;padding:64px 48px;margin:48px 0;color:var(--white);}
+.sim-label{font-size:14px;color:var(--pale);margin-bottom:24px;}
+.sim-out{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap;}
+.sim-figure{font-size:88px;font-weight:400;line-height:1;color:var(--white);}
+.sim-unit{font-size:22px;color:var(--pale);}
+.sim-pl{font-size:22px;color:var(--pale);}
+.sim-pl strong{font-weight:500;}
+.sim-sub{font-size:14px;color:var(--pale);margin-bottom:48px;}
+.sim-input{display:flex;align-items:center;gap:24px;}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;height:2px;
+  background:rgba(255,255,255,.3);border-radius:2px;outline:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--blue);cursor:pointer;transition:background-color .33s;
+}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;background:var(--blue);cursor:pointer;}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(62,106,225,.4);}
+.sim-read{width:190px;text-align:right;font-size:22px;color:var(--white);}
+.sim-toggle{display:flex;gap:8px;margin-top:32px;}
+.sim-toggle button{
+  font-family:inherit;font-size:14px;font-weight:500;padding:8px 20px;min-height:40px;
+  border-radius:4px;border:3px solid transparent;cursor:pointer;
+  background:rgba(255,255,255,.12);color:var(--white);
+  transition:background-color .33s,color .33s;
+}
+.sim-toggle button[aria-pressed="true"]{background:var(--blue);color:var(--white);}
+
+.agenda-item{padding:48px 0;border-bottom:1px solid var(--cloud);display:grid;grid-template-columns:72px 300px 1fr;gap:32px;align-items:start;}
+.agenda-item:last-child{border-bottom:none;}
+.agenda-q{font-size:14px;font-weight:500;color:var(--blue);}
+.agenda-title{font-size:22px;color:var(--carbon);line-height:1.3;}
+.agenda-body{font-size:14px;color:var(--graphite);}
+.agenda-body strong{font-weight:500;color:var(--carbon);}
+.agenda-fact{display:inline-block;margin-top:16px;padding:8px 16px;background:var(--ash);border-radius:4px;font-size:14px;color:var(--pewter);}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.callout{border-left:2px solid var(--blue);padding:8px 0 8px 24px;margin:32px 0;font-size:22px;line-height:1.4;color:var(--carbon);}
+.muted{color:var(--pewter);}
+.disclaim{font-size:14px;color:var(--silver);margin-top:32px;}
+ul{list-style:none;}
+li{padding:12px 0;border-bottom:1px solid var(--cloud);font-size:14px;}
+li:last-child{border-bottom:none;}
+li::before{content:"—";color:var(--pale);margin-right:12px;}
+.divider{height:1px;background:var(--cloud);max-width:1383px;margin:0 auto;}
+footer{padding:64px 32px 96px;max-width:1383px;margin:0 auto;color:var(--silver);font-size:14px;}
+
+@media (max-width:1024px){
+  .stat-grid,.stat-grid.three{grid-template-columns:repeat(2,1fr);gap:32px;}
+  .compare{grid-template-columns:1fr;}
+  .split{grid-template-columns:1fr;gap:32px;}
+  .agenda-item{grid-template-columns:72px 1fr;}
+  .agenda-item .agenda-body{grid-column:2;}
+}
+@media (max-width:768px){
+  .nav{padding:16px;}
+  .navlinks{display:none;}
+  section{padding:80px 20px;}
+  .hero-title{font-size:28px;}
+  h2{font-size:28px;}
+  .stat-figure{font-size:40px;}
+  .cc-big{font-size:40px;}
+  .sim-figure{font-size:56px;}
+  .sim{padding:40px 24px;}
+  .stat-stage{padding:48px 24px;}
+  .agenda-item{grid-template-columns:1fr;gap:16px;}
+  .agenda-item .agenda-body{grid-column:1;}
+  .btn{width:100%;}
+  .bar-name{width:72px;}
+  .bar-val{width:110px;font-size:12px;}
+  .sim-input{flex-direction:column;align-items:stretch;gap:16px;}
+  .sim-read{width:auto;text-align:left;}
+  table{font-size:12px;}
+  td,th{padding:10px 8px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wordmark">YAGATE</div>
+  <div class="navlinks">
+    <a href="#pl">収支</a>
+    <a href="#venue">会場</a>
+    <a href="#access">集客</a>
+    <a href="#agenda">決めたいこと</a>
+  </div>
+  <div class="navdate">定例MTG／2026年8月</div>
+</nav>
+
+<header class="hero">
+  <div class="hero-title">YAGATE</div>
+  <div class="hero-sub">vol.1 〜 vol.37 の収支と集客</div>
+  <div class="hero-meta">2023年6月 — 2026年7月</div>
+  <div class="cta-row">
+    <a href="#pl" class="btn btn-primary">収支を見る</a>
+    <a href="#agenda" class="btn btn-secondary">決めたいこと</a>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<section>
+  <div class="eyebrow">この資料について</div>
+  <h2>3年ぶんを集計しました</h2>
+  <div class="lede">
+    <p>チケットの販売実績、会場費とギャラ、Tigetのアクセスデータを公演ごとに突き合わせました。運営側でこれまで把握できていなかった数字も入っています。</p>
+    <p>今後の進め方を決める材料として使ってください。数字の解釈が違うと思うところがあれば、その場で言ってもらえると助かります。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 収支 -->
+<section id="pl" class="section-full">
+  <div class="eyebrow">収支</div>
+  <h2>3年間で約53万円の赤字</h2>
+  <div class="lede">37公演の累計です。会場費・出演者ギャラ・学生スタッフ費を含みます。</div>
+
+  <div class="stat-stage dark">
+    <div class="stat-grid three">
+      <div>
+        <div class="stat-label">累計売上</div>
+        <div class="stat-figure num">1,603,080<span class="stat-unit">円</span></div>
+        <div class="stat-note">チケット・配信</div>
+      </div>
+      <div>
+        <div class="stat-label">累計コスト</div>
+        <div class="stat-figure num">2,136,200<span class="stat-unit">円</span></div>
+        <div class="stat-note">会場費・ギャラ・スタッフ</div>
+      </div>
+      <div>
+        <div class="stat-label">累計損益</div>
+        <div class="stat-figure num">-533,120<span class="stat-unit">円</span></div>
+        <div class="stat-note">1公演あたり約-14,500円</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>年ごとの推移</h3>
+  <table>
+    <thead>
+      <tr><th>決算期</th><th>公演数</th><th class="r">販売枚数</th><th class="r">売上</th><th class="r">コスト</th><th class="r">損益</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="k">2024/6期</td><td>11</td><td class="r num">298</td><td class="r num">402,580</td><td class="r num">709,000</td><td class="r num">-306,420</td></tr>
+      <tr><td class="k">2025/6期</td><td>12</td><td class="r num">285</td><td class="r num">414,500</td><td class="r num">717,800</td><td class="r num">-303,300</td></tr>
+      <tr class="hl"><td class="k">2026/6期</td><td>12</td><td class="r num">428</td><td class="r num">700,500</td><td class="r num">639,400</td><td class="r pos num">+61,100</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">2026/6期は黒字です。売上が前期の1.7倍になり、コストは下がりました。ただしこの中にvol.33 SPECIAL（+132,000円）が入っています。それを外すと-70,900円で、通常回だけではまだ届いていません。前期の-303,300円からは23万円ぶん改善しました。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 損益分岐 -->
+<section class="section-full">
+  <div class="eyebrow">1公演の構造</div>
+  <h2>今の構造なら、何枚で黒字になるか</h2>
+  <div class="lede">ゲストは現在1組。深海魚・リバーサイドマエストロ・一向聴・チェットがGATE所属になり、ギャラの対象がその1組だけになりました。チケットは一般1,500円・学生1,000円です。</div>
+
+  <div class="compare">
+    <div class="compare-card">
+      <div class="cc-vol">新宿ハイジアV-1</div>
+      <div class="cc-label">損益分岐</div>
+      <div class="cc-big num">36<span style="font-size:22px;color:var(--pewter);">枚</span></div>
+      <div class="cc-row"><span>会場費</span><span class="num">45,000円</span></div>
+      <div class="cc-row"><span>ゲスト1組</span><span class="num">4,000円</span></div>
+      <div class="cc-row"><span>スタッフ</span><span class="num">4,000円</span></div>
+      <div class="cc-row"><span>コスト計</span><span class="num">53,000円</span></div>
+    </div>
+    <div class="compare-card lead">
+      <div class="cc-vol">下北沢シアターミネルヴァ</div>
+      <div class="cc-label">損益分岐</div>
+      <div class="cc-big num">26<span style="font-size:22px;">枚</span></div>
+      <div class="cc-row"><span>会場費</span><span class="num">30,000円</span></div>
+      <div class="cc-row"><span>ゲスト1組</span><span class="num">4,000円</span></div>
+      <div class="cc-row"><span>スタッフ</span><span class="num">4,000円</span></div>
+      <div class="cc-row"><span>コスト計</span><span class="num">38,000円</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="cc-vol">実績</div>
+      <div class="cc-label">直近12公演の平均販売枚数</div>
+      <div class="cc-big num">37<span style="font-size:22px;color:var(--pewter);">枚</span></div>
+      <div class="cc-row"><span>37公演の平均</span><span class="num">29枚</span></div>
+      <div class="cc-row"><span>これまで黒字だった回</span><span class="num">7回</span></div>
+      <div class="cc-row"><span>赤字だった回</span><span class="num">30回</span></div>
+      <div class="cc-row"><span>平均消化率</span><span class="num">50%</span></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    ハイジアで36枚、ミネルヴァなら26枚。<br>
+    直近12公演の平均は37枚です。
+  </div>
+
+  <p class="muted">昔の数字（ゲスト3〜5組、ディレクター費あり）と比べると、1公演のコストは63,000円から53,000円に下がりました。会場をミネルヴァにすれば38,000円です。過去37公演の売上をこの構造に当てはめ直すと、黒字だった回は7回から17回になります。累計も-533,120円ではなく+197,080円です。</p>
+
+  <h3>黒字だった7公演</h3>
+  <table>
+    <thead><tr><th>公演</th><th class="r">販売枚数</th><th class="r">損益</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td class="k">vol.33</td><td class="r num">74</td><td class="r pos num">+132,000</td><td>SPECIAL回・ハリセンボン</td></tr>
+      <tr><td class="k">vol.34</td><td class="r num">64</td><td class="r pos num">+39,000</td><td>65枚中64枚</td></tr>
+      <tr><td class="k">vol.8</td><td class="r num">60</td><td class="r pos num">+25,000</td><td>学生券が完売</td></tr>
+      <tr><td class="k">vol.21</td><td class="r num">54</td><td class="r pos num">+20,000</td><td></td></tr>
+      <tr><td class="k">vol.31</td><td class="r num">44</td><td class="r pos num">+9,000</td><td></td></tr>
+      <tr><td class="k">vol.37</td><td class="r num">44</td><td class="r pos num">+13,000</td><td>直近。ゲスト1組</td></tr>
+      <tr><td class="k">vol.1</td><td class="r num">16</td><td class="r pos num">+2,500</td><td>音響トラブルで会場費0</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- 会場 -->
+<section id="venue" class="section-full">
+  <div class="eyebrow">会場</div>
+  <h2>会場を変えると1公演あたり15,000円変わる</h2>
+  <div class="lede">実際の収支が残っている10公演を並べると、会場費の差がそのまま赤字幅の差になっています。</div>
+
+  <table>
+    <thead><tr><th>公演</th><th>会場</th><th class="r">コスト</th><th class="r">売上</th><th class="r">損益</th></tr></thead>
+    <tbody>
+      <tr><td class="k">vol.2</td><td>ハイジアV-1</td><td class="r num">65,000</td><td class="r num">18,000</td><td class="r num">-47,000</td></tr>
+      <tr><td class="k">vol.5</td><td>ハイジアV-1</td><td class="r num">70,000</td><td class="r num">37,500</td><td class="r num">-32,500</td></tr>
+      <tr><td class="k">vol.13</td><td>ハイジアV-1</td><td class="r num">61,000</td><td class="r num">22,500</td><td class="r num">-38,500</td></tr>
+      <tr><td class="k">vol.16</td><td>ミネルヴァ</td><td class="r num">50,800</td><td class="r num">17,000</td><td class="r num">-33,800</td></tr>
+      <tr><td class="k">vol.27</td><td>ミネルヴァ</td><td class="r num">43,600</td><td class="r num">24,000</td><td class="r num">-19,600</td></tr>
+      <tr class="hl"><td class="k">vol.26</td><td>ミネルヴァ</td><td class="r num">45,800</td><td class="r num">41,500</td><td class="r num">-4,300</td></tr>
+    </tbody>
+  </table>
+
+  <div class="split">
+    <div>
+      <h3>vol.26があと4名で黒字だった</h3>
+      <p class="muted">一般21名・学生10名の31名。コスト45,800円に対して売上41,500円。ここまで来た回はまだこの1回だけです。</p>
+      <p class="muted">学生券10名分が効いています。学生1,000円は客単価を下げますが、その10名は1,000円だから来た可能性があります。削るより増やす方向で考えたいところです。</p>
+    </div>
+    <div>
+      <h3>今の構造をミネルヴァでやったら</h3>
+      <p class="muted">コスト38,000円・分岐26枚。直近11公演（vol.33を除く）の売上をこれに当てはめると、8回が黒字で累計+123,000円です。同じ11公演をハイジアでやると3回だけ黒字、累計-42,000円になります。</p>
+      <p class="muted">ただしキャパや音響、日程の取りやすさは別問題です。数字だけで決められる話ではないので、使い勝手の面で意見をください。</p>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+<section class="section-full">
+  <div class="eyebrow">ゲスト</div>
+  <h2>ゲストを何組呼ぶか</h2>
+  <div class="lede">
+    深海魚・リバーサイドマエストロ・一向聴がGATE所属になり、ギャラの対象は現在1組です。直近3公演を並べると、ゲストの数と集客が連動しています。
+  </div>
+
+  <table>
+    <thead><tr><th>公演</th><th class="r">ゲスト</th><th class="r">ギャラ</th><th class="r">コスト</th><th class="r">販売枚数</th><th class="r">損益</th></tr></thead>
+    <tbody>
+      <tr><td class="k">vol.35</td><td class="r">0組</td><td class="r num">0</td><td class="r num">49,000</td><td class="r num">28</td><td class="r num">-7,000</td></tr>
+      <tr><td class="k">vol.36</td><td class="r">0組</td><td class="r num">0</td><td class="r num">49,000</td><td class="r num">19</td><td class="r num">-20,500</td></tr>
+      <tr class="hl"><td class="k">vol.37</td><td class="r">1組</td><td class="r num">4,000</td><td class="r num">53,000</td><td class="r num">44</td><td class="r pos num">+13,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="split">
+    <div>
+      <h3>ゲストを削ると集客も落ちている</h3>
+      <p class="muted">vol.35・36はゲストなしでコストを49,000円まで下げましたが、28枚・19枚と落ちました。vol.37で無尽蔵を1組入れて44枚に戻り、+13,000円の黒字です。ゲスト代4,000円を削って15枚失うなら割に合いません。</p>
+    </div>
+    <div>
+      <h3>5組は重い</h3>
+      <p class="muted">vol.7やvol.37の初期案のようにゲスト5組だと、ギャラだけで20,000円。分岐は46枚まで上がります。集客の上振れがそこまで見込めないなら、1〜2組が現実的なところです。</p>
+    </div>
+  </div>
+
+  <p class="disclaim">ゲスト1組あたり4,000円で計算しています。実額は2,400〜8,800円と幅があるので、目安の数字です。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 集客 -->
+<section id="access" class="section-full">
+  <div class="eyebrow">集客</div>
+  <h2>売れた回と売れなかった回の違い</h2>
+  <div class="lede">
+    メンバーがほぼ同じ、値段も会場も同じ3公演。枚数は64枚・28枚・19枚と3倍以上違いました。ただしチケットページを見た人のうち買った人の割合は、3公演ともほぼ同じです。
+  </div>
+
+  <div class="compare">
+    <div class="compare-card lead">
+      <div class="cc-vol">vol.34 &nbsp;2026.04.21</div>
+      <div class="cc-label">販売枚数</div>
+      <div class="cc-big num">64<span style="font-size:22px;">/65</span></div>
+      <div class="cc-row"><span>ページを見た人</span><span class="num">1,399</span></div>
+      <div class="cc-row"><span>買った割合</span><span class="hit num">4.6%</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="cc-vol">vol.35 &nbsp;2026.05.25</div>
+      <div class="cc-label">販売枚数</div>
+      <div class="cc-big num">28<span style="font-size:22px;color:var(--pewter);">/65</span></div>
+      <div class="cc-row"><span>ページを見た人</span><span class="num">625</span></div>
+      <div class="cc-row"><span>買った割合</span><span class="hit num">4.5%</span></div>
+    </div>
+    <div class="compare-card">
+      <div class="cc-vol">vol.36 &nbsp;2026.06.23</div>
+      <div class="cc-label">販売枚数</div>
+      <div class="cc-big num">19<span style="font-size:22px;color:var(--pewter);">/65</span></div>
+      <div class="cc-row"><span>ページを見た人</span><span class="num">426</span></div>
+      <div class="cc-row"><span>買った割合</span><span class="hit num">4.5%</span></div>
+    </div>
+  </div>
+
+  <p class="muted">37公演を通しても平均4.8%で、ほとんど動きません。ページまで来た人はいつでも同じ割合で買っています。差がついたのは、来た人数です。企画やネタの内容で枚数が決まっていた形跡は、数字の上では見つかりませんでした。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- シミュレータ -->
+<section>
+  <div class="eyebrow">見込みの立て方</div>
+  <h2>アクセス数から枚数と収支が読める</h2>
+  <div class="lede">37公演の実績から計算した式です。ゲスト1組・スタッフ4,000円の現行コストで計算しています。会場を切り替えると損益分岐が変わります。</div>
+
+  <div class="sim">
+    <div class="sim-label">予測される販売枚数と収支</div>
+    <div class="sim-out">
+      <div class="sim-figure num" id="simOut">40</div>
+      <div class="sim-unit">枚 / 65枚</div>
+      <div class="sim-pl">収支 <strong class="num" id="simPL">-3,000円</strong></div>
+    </div>
+    <div class="sim-sub" id="simMsg"></div>
+    <div class="sim-input">
+      <input type="range" id="simRange" min="150" max="1600" step="25" value="880" aria-label="ページを見た人数">
+      <div class="sim-read"><span class="num" id="simIn">880</span> 人が見た場合</div>
+    </div>
+    <div class="sim-toggle" role="group" aria-label="会場の切り替え">
+      <button type="button" id="btnHai" aria-pressed="true">ハイジア（53,000円）</button>
+      <button type="button" id="btnMin" aria-pressed="false">ミネルヴァ（38,000円）</button>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>公演</th><th class="r">見た人数</th><th class="r">式の予測</th><th class="r">実際</th></tr></thead>
+    <tbody>
+      <tr><td class="k">vol.34</td><td class="r num">1,399</td><td class="r num">64枚</td><td class="r num">64枚</td></tr>
+      <tr><td class="k">vol.35</td><td class="r num">625</td><td class="r num">30枚</td><td class="r num">28枚</td></tr>
+      <tr><td class="k">vol.36</td><td class="r num">426</td><td class="r num">21枚</td><td class="r num">19枚</td></tr>
+      <tr><td class="k">vol.37</td><td class="r num">896</td><td class="r num">42枚</td><td class="r num">44枚</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">今の構造だと、ハイジアで黒字にするには約760人、ミネルヴァなら約540人です。vol.37は896人でした。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 初速 -->
+<section class="section-full">
+  <div class="eyebrow">発売初日</div>
+  <h2>初日のアクセスで、その回の枚数がほぼ決まっている</h2>
+  <div class="lede">
+    日別のアクセスを見ると、どの公演も形が同じでした。発売初日に山があり、そのあとは毎日0〜5人が続きます。初日の高さの順番が、そのまま最終枚数の順番になっています。
+  </div>
+
+  <div class="bars">
+    <div class="bar-row">
+      <div class="bar-name">vol.34</div>
+      <div class="bar-track"><div class="bar-fill on" style="width:100%"></div></div>
+      <div class="bar-val">初日228人 → 64枚</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">vol.37</div>
+      <div class="bar-track"><div class="bar-fill on" style="width:50%"></div></div>
+      <div class="bar-val">初日115人 → 44枚</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">vol.35</div>
+      <div class="bar-track"><div class="bar-fill" style="width:14%"></div></div>
+      <div class="bar-val">初日32人 → 28枚</div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-name">vol.36</div>
+      <div class="bar-track"><div class="bar-fill" style="width:14%"></div></div>
+      <div class="bar-val">初日32人 → 19枚</div>
+    </div>
+  </div>
+
+  <div class="split">
+    <div>
+      <h3>長く売っても増えていない</h3>
+      <p class="muted">販売期間が一番長かったvol.36（29日）が4公演で最下位です。一番短かったvol.35（17日）の方が売れています。早くページを開けても、初日に人が来なければ枚数は伸びていません。</p>
+    </div>
+    <div>
+      <h3>途中の投稿では取り返せていない</h3>
+      <p class="muted">vol.35は販売期間の中盤に4回ほど山を作っていますが、1回あたり10〜20人ぶんです。初日の228人と比べると差が大きすぎます。</p>
+    </div>
+  </div>
+
+  <p class="disclaim">日別データが取れているのは4公演だけです。まだ確定した話ではないので、次回から意識して試して確かめたいところです。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 効かなかったもの -->
+<section>
+  <div class="eyebrow">検証結果</div>
+  <h2>効果が確認できなかったもの</h2>
+  <div class="lede">これまでやってきた施策のうち、枚数との関係が数字に出なかったものです。</div>
+
+  <table>
+    <thead><tr><th>施策</th><th class="r">枚数との関係</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="k">Instagram</td>
+        <td class="r">ほぼなし</td>
+        <td>流入は歴代最多クラスまで増えましたが、枚数は動いていません。IG流入が7倍多い回と少ない回で、買う割合が同じでした。</td>
+      </tr>
+      <tr>
+        <td class="k">販売期間を長くとる</td>
+        <td class="r">なし</td>
+        <td>29日売った回が4公演で最下位です。期間の長さは枚数に効いていません。</td>
+      </tr>
+      <tr>
+        <td class="k">お笑いライブ情報サイト</td>
+        <td class="r">弱い</td>
+        <td>初期は効いて見えましたが、直近ではほぼ関係がなくなっています。掲載は無料なので続けますが、主役ではありません。</td>
+      </tr>
+      <tr class="hl">
+        <td class="k">X（Twitter）</td>
+        <td class="r">強い</td>
+        <td>特に発売初日。vol.34のX経由738人は歴代1位で、2位の503人を大きく上回ります。</td>
+      </tr>
+      <tr class="hl">
+        <td class="k">Google検索</td>
+        <td class="r">伸びている</td>
+        <td>「YAGATE」と名前で検索して来る人が3年で倍以上に増えました。続けてきたぶんが効いています。</td>
+      </tr>
+      <tr class="hl">
+        <td class="k">学生券（1,000円）</td>
+        <td class="r">効いている</td>
+        <td>vol.8は学生券が完売。vol.26は学生10名で、この回が最も黒字に近づきました。</td>
+      </tr>
+      <tr>
+        <td class="k">ステッカー（300円）</td>
+        <td class="r">記録なし</td>
+        <td>販売数を記録していないため効果が測れていません。仮に来場30人の2割が買っても1,800円で、赤字を埋める規模ではありません。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- アジェンダ -->
+<section id="agenda">
+  <div class="eyebrow">今日の議題</div>
+  <h2>決めたいこと</h2>
+  <div class="lede">運営側で答えを持っていない項目です。意見をください。</div>
+
+  <div class="agenda-item">
+    <div class="agenda-q">01</div>
+    <div><div class="agenda-title">会場を下北沢に寄せていいか</div></div>
+    <div class="agenda-body">
+      <p>数字だけ見ればミネルヴァ一択です。損益分岐が36枚から26枚に下がります。ただ<strong>キャパ・音響・楽屋・アクセス</strong>など、使ってみた実感の部分は聞かないとわかりません。ハイジアの方がいい理由があれば教えてください。</p>
+      <div class="agenda-fact">差額 15,000円／公演・年間18万円</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-q">02</div>
+    <div><div class="agenda-title">vol.34の発売日、何をしたか覚えているか</div></div>
+    <div class="agenda-body">
+      <p>初日に228人が来て、64枚まで行った回です。ゲストの拡散なのか、投稿の出し方なのか、たまたま複数人が同じ日に告知したのか。<strong>再現できれば、これ1つで黒字圏に入ります。</strong>心当たりを聞かせてください。</p>
+      <div class="agenda-fact">初日228人は他3公演の平均の約4倍</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-q">03</div>
+    <div><div class="agenda-title">発売日に全員で告知できるか</div></div>
+    <div class="agenda-body">
+      <p>初日で枚数がほぼ決まるなら、発売日の同じ時間帯に全員が投稿するのが一番効きます。<strong>何時なら投稿しやすいか、何を用意すれば楽か</strong>を決めたいです。画像とテキストは運営で作ります。</p>
+      <div class="agenda-fact">現状は発売翌日から18日間ほぼ動きなし</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-q">04</div>
+    <div><div class="agenda-title">ゲストは1組のままでいいか</div></div>
+    <div class="agenda-body">
+      <p>ゲストなしのvol.35・36は28枚・19枚、1組入れたvol.37は44枚で+13,000円の黒字でした。<strong>ゲスト代4,000円で15枚増えるなら、呼んだ方が得です。</strong>誰を呼ぶかも含めて、1組・2組・それ以上のどれで組むか決めたいです。</p>
+      <div class="agenda-fact">ゲスト0組 平均23.5枚／1組 44枚</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-q">05</div>
+    <div><div class="agenda-title">値上げはしない、でいいか</div></div>
+    <div class="agenda-body">
+      <p>今の構造ならミネルヴァで26枚、ハイジアで36枚が分岐点です。直近12公演の平均は37枚なので、<strong>値上げしなくても黒字が成立します。</strong>お客さんの負担を増やさずに済むこの案でいいか確認させてください。</p>
+      <div class="agenda-fact">直近12公演の平均 37枚 &gt; 分岐 26〜36枚</div>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-q">06</div>
+    <div><div class="agenda-title">物販をステッカー以外にも広げるか</div></div>
+    <div class="agenda-body">
+      <p>今は300円のステッカーだけです。単価が低いので、売れても1公演あたり2,000円前後にしかなりません。Tシャツやチェキなど<strong>単価の高いものを増やすか、ステッカーのままでいくか。</strong>終演後の時間が拘束されるので、やりたくない人がいるならやりません。まず販売数の記録から始めます。</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-q">07</div>
+    <div><div class="agenda-title">YAGATEを何のための場にするか</div></div>
+    <div class="agenda-body">
+      <p>ライブ単体で黒字を出す場所にするのか、<strong>単独ライブや外の仕事につながる入口</strong>として続けるのか。後者なら判断基準は枚数ではなく「ここ経由で何が生まれたか」になります。どちらを目指すかで、ここまでの話の優先順位が変わります。</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="eyebrow">運営側でやること</div>
+  <h2>宿題</h2>
+  <ul>
+    <li>公演ごとの会場を確定させる（実際の記録が残っているのは10公演分だけ）</li>
+    <li>発売日に配る告知セット（画像・テキスト・リンク）を前日までに全員へ渡す</li>
+    <li>vol.10の予約32枚と入金18,000円の差を確認する</li>
+    <li>ステッカーの販売数を毎回記録する</li>
+    <li>Tigetの予約者データを蓄積し、リピーターの人数を出せるようにする</li>
+    <li>公式サイトからチケットページへの導線を直す</li>
+    <li>販売中のアクセス数を週次で共有し、着地見込みを全員が見られるようにする</li>
+  </ul>
+  <p class="disclaim">vol.1〜37の販売実績、Tigetの流入元・日別アクセス、公演別の収支メモをもとにしています。実際の収支が残っているのは10公演で、残りは標準値（会場費45,000／30,000円、ゲスト1組4,000円、スタッフ4,000円）による推計です。vol.11〜21は出演者記録にゲスト名がないため3組として計上しました。vol.33は券種が複数あるため一部の集計から除いています。</p>
+</section>
+
+<footer>
+  YAGATE 定例MTG資料 ／ 2026年8月 ／ GATE株式会社
+</footer>
+
+<script>
+(function(){
+  var slope=0.0439, intercept=2.49, cap=65, price=1500;
+  var costs={hai:53000, min:38000};
+  var venue='hai';
+  var range=document.getElementById('simRange');
+  var out=document.getElementById('simOut');
+  var read=document.getElementById('simIn');
+  var pl=document.getElementById('simPL');
+  var msg=document.getElementById('simMsg');
+  var bHai=document.getElementById('btnHai'), bMin=document.getElementById('btnMin');
+
+  function yen(n){
+    return (n<0?'-':'+') + Math.abs(n).toLocaleString('ja-JP') + '円';
+  }
+  function update(){
+    var v=parseInt(range.value,10);
+    var n=Math.min(cap, Math.round(slope*v+intercept));
+    var profit=Math.round(n*price - costs[venue]);
+    var be=Math.ceil(costs[venue]/price);
+    out.textContent=n;
+    read.textContent=v.toLocaleString('ja-JP');
+    pl.textContent=yen(profit);
+    pl.style.color = profit>=0 ? '#7FA0F0' : '#FFFFFF';
+    if(profit>=0){
+      msg.textContent='黒字。損益分岐の'+be+'枚を超えています。';
+    }else{
+      msg.textContent='赤字。黒字には'+be+'枚（あと'+(be-n)+'枚）必要です。';
+    }
+  }
+  function setVenue(v){
+    venue=v;
+    bHai.setAttribute('aria-pressed', v==='hai');
+    bMin.setAttribute('aria-pressed', v==='min');
+    update();
+  }
+  range.addEventListener('input',update);
+  bHai.addEventListener('click',function(){setVenue('hai');});
+  bMin.addEventListener('click',function(){setVenue('min');});
+  update();
+})();
+</script>
+
+</body>
+</html>
