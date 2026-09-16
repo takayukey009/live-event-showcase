@@ -770,8 +770,20 @@ body {
   <span class="hud-counter" id="slideCounter">01 / 11</span>
   <button class="hud-btn" onclick="nextSlide()" title="次のスライド (→)"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></button>
   <div style="width:1px; height:16px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+  <button class="hud-btn" onclick="toggleOverview()" title="スライド一覧 (G / O)"><i data-lucide="grid" style="width:14px;height:14px;"></i> 一覧</button>
   <button class="hud-btn" onclick="toggleFullscreen()" title="全画面 (F)"><i data-lucide="maximize" style="width:14px;height:14px;"></i></button>
   <a href="/portal" class="hud-btn" style="text-decoration:none;" title="ポータルへ戻る"><i data-lucide="layout-grid" style="width:14px;height:14px;"></i> ポータル</a>
+</div>
+
+<!-- Overview Grid Modal -->
+<div id="overviewModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(11,15,23,0.92); backdrop-filter:blur(16px); z-index:2000; overflow-y:auto; padding:48px 24px;">
+  <div style="max-width:1400px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:16px;">
+      <h3 style="color:white; font-size:24px; font-weight:800;">📑 スライド一覧 (全11ページ)</h3>
+      <button onclick="toggleOverview()" style="background:transparent; border:none; color:#94A3B8; cursor:pointer; font-size:16px; font-weight:700;">✕ 閉じる (Esc)</button>
+    </div>
+    <div id="overviewGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:24px;"></div>
+  </div>
 </div>
 
 <script>
@@ -788,6 +800,7 @@ window.addEventListener('DOMContentLoaded', () => {
   scaleCanvas();
   totalSlides = document.querySelectorAll('.slide').length;
   updateSlide();
+  initOverviewGrid();
   if (window.lucide) lucide.createIcons();
 });
 
@@ -807,6 +820,11 @@ function nextSlide() {
 function prevSlide() {
   if (currentSlide > 0) { currentSlide--; updateSlide(); }
 }
+function goToSlide(idx) {
+  currentSlide = idx;
+  updateSlide();
+  toggleOverview(false);
+}
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen().catch(() => {});
@@ -814,11 +832,49 @@ function toggleFullscreen() {
     document.exitFullscreen();
   }
 }
+function toggleOverview(forceState) {
+  const modal = document.getElementById('overviewModal');
+  const isVisible = modal.style.display === 'block';
+  const nextState = forceState !== undefined ? forceState : !isVisible;
+  modal.style.display = nextState ? 'block' : 'none';
+}
+function initOverviewGrid() {
+  const grid = document.getElementById('overviewGrid');
+  const slides = document.querySelectorAll('.slide');
+  grid.innerHTML = '';
+  slides.forEach((s, idx) => {
+    const badge = s.querySelector('.slide-badge')?.textContent || `Slide ${idx+1}`;
+    const title = s.querySelector('.slide-title')?.textContent || s.querySelector('h1')?.textContent || '';
+    const item = document.createElement('div');
+    item.style.cssText = 'background:#1E293B; border:1px solid #334155; border-radius:12px; padding:20px; cursor:pointer; transition:all 0.2s;';
+    item.innerHTML = `
+      <div style="font-size:12px; font-weight:700; color:#38BDF8; margin-bottom:8px;">${badge}</div>
+      <div style="font-size:16px; font-weight:700; color:white; line-height:1.4;">${title.slice(0, 35)}...</div>
+    `;
+    item.onmouseenter = () => { item.style.borderColor = '#38BDF8'; item.style.transform = 'translateY(-3px)'; };
+    item.onmouseleave = () => { item.style.borderColor = '#334155'; item.style.transform = 'none'; };
+    item.onclick = () => goToSlide(idx);
+    grid.appendChild(item);
+  });
+}
+
+// Keyboard & Touch events
 window.addEventListener('keydown', (e) => {
-  if (['ArrowRight', 'Space', 'Enter', 'PageDown'].includes(e.code)) { nextSlide(); }
+  if (e.key === 'Escape') { toggleOverview(false); }
+  else if (e.key === 'g' || e.key === 'G' || e.key === 'o' || e.key === 'O') { toggleOverview(); }
+  else if (['ArrowRight', 'Space', 'Enter', 'PageDown'].includes(e.code)) { nextSlide(); }
   else if (['ArrowLeft', 'Backspace', 'PageUp'].includes(e.code)) { prevSlide(); }
   else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
 });
+
+let touchStartX = 0;
+window.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, false);
+window.addEventListener('touchend', (e) => {
+  const diff = e.changedTouches[0].screenX - touchStartX;
+  if (diff < -50) nextSlide();
+  if (diff > 50) prevSlide();
+}, false);
+
 </script>
 </body>
 </html>
