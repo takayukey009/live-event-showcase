@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YAGATE 収益分析 & 定例MTGプレゼンテーション (16:9)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+:root {
+  --primary: #1E3A8A;
+  --primary-accent: #2563EB;
+  --secondary-accent: #0284C7;
+  --text-dark: #0F172A;
+  --text-body: #334155;
+  --text-muted: #64748B;
+  --bg-page: #0B0F17;
+  --bg-slide: #FFFFFF;
+  --card-bg: #F8FAFC;
+  --border-light: #E2E8F0;
+  --badge-bg: #EFF6FF;
+  --success: #16A34A;
+  --danger: #DC2626;
+  --warning: #D97706;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg-page);
+  color: var(--text-dark);
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.slide-canvas {
+  width: 1920px;
+  height: 1080px;
+  background: var(--bg-slide);
+  position: absolute;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(0,0,0,0.6);
+  transform-origin: center center;
+  border-radius: 4px;
+}
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 1920px; height: 1080px;
+  padding: 80px 100px 90px;
+  display: none;
+  flex-direction: column;
+  background: #FFFFFF;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+.slide.active {
+  display: flex;
+  opacity: 1;
+}
+/* Progress Bar */
+.progress-bar-container {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 5px;
+  background: rgba(255,255,255,0.1);
+  z-index: 1000;
+}
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2563EB, #38BDF8);
+  transition: width 0.3s ease;
+}
+/* HUD Controls */
+.hud-controls {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  z-index: 1000;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+.hud-btn {
+  background: transparent;
+  border: none;
+  color: #E2E8F0;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.hud-btn:hover {
+  background: rgba(255,255,255,0.15);
+  color: #FFFFFF;
+}
+.hud-counter {
+  color: #94A3B8;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', monospace;
+  padding: 0 8px;
+}
+</style>
+</head>
+<body>
+<div class="progress-bar-container">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="viewport" id="viewport">
+  <div class="slide-canvas" id="slideCanvas">
+    <!-- Slides will be injected here -->
+  </div>
+</div>
+
+<div class="hud-controls">
+  <button class="hud-btn" onclick="prevSlide()" title="前のスライド (←)"><i data-lucide="chevron-left" style="width:16px;height:16px;"></i></button>
+  <span class="hud-counter" id="slideCounter">01 / 11</span>
+  <button class="hud-btn" onclick="nextSlide()" title="次のスライド (→)"><i data-lucide="chevron-right" style="width:16px;height:16px;"></i></button>
+  <div style="width:1px; height:16px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+  <button class="hud-btn" onclick="toggleFullscreen()" title="全画面 (F)"><i data-lucide="maximize" style="width:14px;height:14px;"></i></button>
+  <a href="/portal" class="hud-btn" style="text-decoration:none;" title="ポータルへ戻る"><i data-lucide="layout-grid" style="width:14px;height:14px;"></i> ポータル</a>
+</div>
+
+<script>
+let currentSlide = 0;
+let totalSlides = 0;
+
+function scaleCanvas() {
+  const canvas = document.getElementById('slideCanvas');
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  canvas.style.transform = `scale(${scale})`;
+}
+window.addEventListener('resize', scaleCanvas);
+window.addEventListener('DOMContentLoaded', () => {
+  scaleCanvas();
+  totalSlides = document.querySelectorAll('.slide').length;
+  updateSlide();
+  if (window.lucide) lucide.createIcons();
+});
+
+function updateSlide() {
+  const slides = document.querySelectorAll('.slide');
+  totalSlides = slides.length;
+  if (!totalSlides) return;
+  slides.forEach((s, idx) => s.classList.toggle('active', idx === currentSlide));
+  const pad = (n) => String(n).padStart(2, '0');
+  document.getElementById('slideCounter').textContent = `${pad(currentSlide + 1)} / ${pad(totalSlides)}`;
+  document.getElementById('progressBar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); }
+}
+function prevSlide() {
+  if (currentSlide > 0) { currentSlide--; updateSlide(); }
+}
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen();
+  }
+}
+window.addEventListener('keydown', (e) => {
+  if (['ArrowRight', 'Space', 'Enter', 'PageDown'].includes(e.code)) { nextSlide(); }
+  else if (['ArrowLeft', 'Backspace', 'PageUp'].includes(e.code)) { prevSlide(); }
+  else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
+});
+</script>
+</body>
+</html>
