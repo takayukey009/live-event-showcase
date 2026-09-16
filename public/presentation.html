@@ -125,6 +125,31 @@ body {
   font-family: 'Plus Jakarta Sans', monospace;
   padding: 0 8px;
 }
+/* Slide Content Styling */
+.slide-header { margin-bottom: 40px; }
+.slide-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--badge-bg); color: var(--primary-accent); font-size: 15px; font-weight: 700; border-radius: 9999px; margin-bottom: 16px; letter-spacing: 0.05em; text-transform: uppercase; }
+.slide-title { font-size: 46px; font-weight: 800; color: var(--text-dark); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 12px; }
+.slide-subtitle { font-size: 20px; color: var(--text-muted); font-weight: 500; }
+.slide-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.slide-footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border-light); display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.card { background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 16px; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; }
+.card-lead { background: #0F172A; color: white; border-color: #1E293B; }
+.card-lead .card-title, .card-lead .kpi-num { color: #FFFFFF; }
+.card-lead .card-desc, .card-lead .kpi-sub { color: #94A3B8; }
+.kpi-title { font-size: 16px; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; }
+.kpi-num { font-size: 58px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-dark); line-height: 1; letter-spacing: -0.03em; margin-bottom: 12px; }
+.kpi-sub { font-size: 15px; color: var(--text-muted); font-weight: 500; }
+.table-custom { width: 100%; border-collapse: collapse; font-size: 18px; margin-top: 12px; }
+.table-custom th, .table-custom td { padding: 18px 24px; text-align: left; border-bottom: 1px solid var(--border-light); }
+.table-custom th { font-weight: 700; color: var(--text-muted); font-size: 15px; background: #F8FAFC; border-top: 1px solid var(--border-light); }
+.table-custom td.num { text-align: right; font-family: 'Plus Jakarta Sans', monospace; font-weight: 600; }
+.table-custom tr.highlight-row { background: #EFF6FF; font-weight: 700; }
+.text-danger { color: var(--danger) !important; }
+.text-success { color: var(--success) !important; }
+.text-primary { color: var(--primary-accent) !important; }
 </style>
 </head>
 <body>
@@ -134,7 +159,178 @@ body {
 
 <div class="viewport" id="viewport">
   <div class="slide-canvas" id="slideCanvas">
-    <!-- Slides will be injected here -->
+    <!-- SLIDE 1: COVER -->
+    <div class="slide active" id="slide-1" style="justify-content:center; align-items:center; text-align:center; background:radial-gradient(circle at 50% 30%, #F8FAFC, #FFFFFF);">
+      <div class="slide-badge" style="background:#EEF2FF; color:#4F46E5; margin-bottom:28px;">
+        <i data-lucide="sparkles" style="width:16px;height:16px;"></i> GATE TALENT AGENCY / 定例MTG
+      </div>
+      <h1 style="font-size: 64px; font-weight: 900; color: #0F172A; line-height: 1.25; margin-bottom: 24px; letter-spacing: -0.03em; max-width: 1400px;">
+        GATE事務所ライブ「YAGATE」<br><span style="color:#2563EB;">TIGETから見る収益レポート</span>
+      </h1>
+      <p style="font-size: 26px; color: #475569; font-weight: 500; margin-bottom: 56px; max-width: 1100px;">
+        通算37公演（2023年6月〜2026年7月）の全取引・集客・収支データから導く黒字化と事前決済戦略
+      </p>
+      <div style="display:flex; gap:36px; padding:20px 48px; background:#F1F5F9; border-radius:16px; border:1px solid #E2E8F0; font-size:18px; color:#334155; font-weight:600;">
+        <span>📅 2026年8月 定例会議</span>
+        <span>•</span>
+        <span>🏢 株式会社GATE ライブ運営事務局</span>
+        <span>•</span>
+        <span>📍 新宿ハイジアV-1 / 下北沢ミネルヴァ</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: 3-YEAR SUMMARY -->
+    <div class="slide" id="slide-2">
+      <div class="slide-header">
+        <div class="slide-badge">01. 全期間サマリー</div>
+        <h2 class="slide-title">3年間の累計実績（vol.1 〜 vol.37）</h2>
+        <p class="slide-subtitle">累計損益は約▲53万円だが、直近2026/6期は売上1.7倍増で黒字転換を達成</p>
+      </div>
+      <div class="slide-body">
+        <div class="grid-4" style="margin-bottom: 36px;">
+          <div class="card">
+            <div class="kpi-title">累計開催数</div>
+            <div class="kpi-num">37 <span style="font-size:24px;font-weight:600;color:var(--text-muted);">公演</span></div>
+            <div class="kpi-sub">通常36回 + SPECIAL 1回</div>
+          </div>
+          <div class="card">
+            <div class="kpi-title">累計販売枚数</div>
+            <div class="kpi-num text-primary">1,071 <span style="font-size:24px;font-weight:600;color:var(--text-muted);">枚</span></div>
+            <div class="kpi-sub">平均 28.9 枚 / 公演</div>
+          </div>
+          <div class="card">
+            <div class="kpi-title">累計売上高</div>
+            <div class="kpi-num">¥1,603k</div>
+            <div class="kpi-sub">平均 ¥43,326 / 公演</div>
+          </div>
+          <div class="card" style="border-left: 5px solid var(--danger);">
+            <div class="kpi-title">累計損益</div>
+            <div class="kpi-num text-danger">-¥533k</div>
+            <div class="kpi-sub">1公演あたり平均 ▲14,500円</div>
+          </div>
+        </div>
+        <table class="table-custom">
+          <thead>
+            <tr>
+              <th>決算期</th>
+              <th class="num">公演数</th>
+              <th class="num">販売枚数</th>
+              <th class="num">売上高</th>
+              <th class="num">コスト計</th>
+              <th class="num">損益</th>
+              <th>状況分析</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>2024/6期</strong>（初年度）</td>
+              <td class="num">11 回</td>
+              <td class="num">298 枚</td>
+              <td class="num">¥402,580</td>
+              <td class="num">¥709,000</td>
+              <td class="num text-danger">-¥306,420</td>
+              <td>ゲスト3〜5組呼ぶ体制で固定費過大（1回あたり▲2.7万）</td>
+            </tr>
+            <tr>
+              <td><strong>2025/6期</strong>（2年目）</td>
+              <td class="num">12 回</td>
+              <td class="num">285 枚</td>
+              <td class="num">¥414,500</td>
+              <td class="num">¥717,800</td>
+              <td class="num text-danger">-¥303,300</td>
+              <td>動員横ばい、コスト高止まりが継続（1回あたり▲2.5万）</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>2026/6期</strong>（直近期）</td>
+              <td class="num">12 回</td>
+              <td class="num">428 枚</td>
+              <td class="num">¥700,500</td>
+              <td class="num">¥639,400</td>
+              <td class="num text-success">+¥61,100</td>
+              <td>売上1.7倍・コスト削減。vol.33特例除くも大幅に改善基調</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="slide-footer">
+        <span>GATE TALENT AGENCY | YAGATE LIVE 収益レポート</span>
+        <span>Slide 02 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: VENUE & BREAKEVEN -->
+    <div class="slide" id="slide-3">
+      <div class="slide-header">
+        <div class="slide-badge">02. コスト構造 & 損益分岐</div>
+        <h2 class="slide-title">1公演の構造：会場費による分岐点の違い</h2>
+        <p class="slide-subtitle">会場を変えるだけで1回15,000円（年間18万円）の固定費差が発生</p>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card" style="border-top: 6px solid #4F46E5;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+              <h3 style="font-size:28px; font-weight:800; color:#0F172A;">新宿ハイジアV-1</h3>
+              <span style="padding:6px 14px; background:#EEF2FF; color:#4F46E5; font-weight:700; border-radius:8px;">現行メイン会場</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:28px;">
+              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+                <span style="color:#64748B;">会場費（定価）</span>
+                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥45,000</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+                <span style="color:#64748B;">ゲストギャラ（1組目安）</span>
+                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+                <span style="color:#64748B;">学生スタッフ運営費</span>
+                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:22px; font-weight:800; color:#1E293B;">
+                <span>1公演合計コスト</span>
+                <span style="font-family:'Plus Jakarta Sans',monospace; color:#2563EB;">¥53,000</span>
+              </div>
+            </div>
+            <div style="background:#F1F5F9; border-radius:12px; padding:20px; text-align:center;">
+              <span style="font-size:16px; color:#64748B; font-weight:600;">損益分岐動員数（単価1,500円換算）</span>
+              <div style="font-size:48px; font-weight:900; color:#0F172A; font-family:'Plus Jakarta Sans',monospace;">36 <span style="font-size:22px; font-weight:600; color:#64748B;">枚</span></div>
+            </div>
+          </div>
+
+          <div class="card" style="border-top: 6px solid #10B981;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+              <h3 style="font-size:28px; font-weight:800; color:#0F172A;">下北沢シアターミネルヴァ</h3>
+              <span style="padding:6px 14px; background:#ECFDF5; color:#059669; font-weight:700; border-radius:8px;">候補会場</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:28px;">
+              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+                <span style="color:#64748B;">会場費（定価）</span>
+                <strong style="font-family:'Plus Jakarta Sans',monospace; color:#059669;">¥30,000（▲15,000円）</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+                <span style="color:#64748B;">ゲストギャラ（1組目安）</span>
+                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+                <span style="color:#64748B;">学生スタッフ運営費</span>
+                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:22px; font-weight:800; color:#1E293B;">
+                <span>1公演合計コスト</span>
+                <span style="font-family:'Plus Jakarta Sans',monospace; color:#059669;">¥38,000</span>
+              </div>
+            </div>
+            <div style="background:#ECFDF5; border-radius:12px; padding:20px; text-align:center;">
+              <span style="font-size:16px; color:#065F46; font-weight:600;">損益分岐動員数（単価1,500円換算）</span>
+              <div style="font-size:48px; font-weight:900; color:#059669; font-family:'Plus Jakarta Sans',monospace;">26 <span style="font-size:22px; font-weight:600; color:#047857;">枚（▲10枚）</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>※直近12公演の平均動員は37.4枚。現在の体制であればどちらの会場でも分岐を上回る実績。</span>
+        <span>Slide 03 / 11</span>
+      </div>
+    </div>
   </div>
 </div>
 
