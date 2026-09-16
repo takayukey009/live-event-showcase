@@ -858,6 +858,8 @@ window.addEventListener('DOMContentLoaded', () => {
   totalSlides = document.querySelectorAll('.slide').length;
   updateSlide();
   initOverviewGrid();
+  initCharts();
+  initSimulator();
   if (window.lucide) lucide.createIcons();
 });
 
@@ -931,6 +933,124 @@ window.addEventListener('touchend', (e) => {
   if (diff < -50) nextSlide();
   if (diff > 50) prevSlide();
 }, false);
+
+// Charts Initialization
+function initCharts() {
+  const ctxSource = document.getElementById('sourceChart');
+  if (ctxSource) {
+    new Chart(ctxSource, {
+      type: 'doughnut',
+      data: {
+        labels: ['X (旧Twitter)', 'Google 検索', 'Instagram', '直接流入 / LINE等', 'Yahoo! 検索', '公式HP (yagate.jp)', 'その他'],
+        datasets: [{
+          data: [38.5, 26.2, 8.8, 9.5, 5.2, 1.5, 10.3],
+          backgroundColor: ['#2563EB', '#0F172A', '#E11D48', '#64748B', '#F59E0B', '#10B981', '#CBD5E1'],
+          borderWidth: 2,
+          borderColor: '#FFFFFF'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { boxWidth: 12, font: { family: 'Noto Sans JP', size: 12 } } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+        },
+        cutout: '60%'
+      }
+    });
+  }
+
+  const ctxLead = document.getElementById('leadTimeChart');
+  if (ctxLead) {
+    new Chart(ctxLead, {
+      type: 'bar',
+      data: {
+        labels: ['初動(22日前〜)', '3週間前', '2週間前', '1週間前', '直前(1〜3日前)', '公演当日'],
+        datasets: [
+          { label: '予約シェア (%)', data: [50.2, 15.9, 12.8, 5.5, 7.3, 8.3], backgroundColor: '#2563EB', borderRadius: 4 },
+          { label: 'キャンセル率 (%)', data: [32.4, 23.5, 29.8, 18.2, 18.6, 10.3], backgroundColor: '#DC2626', borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'top', labels: { boxWidth: 12, font: { family: 'Noto Sans JP', size: 11 } } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+          y: { grid: { color: '#F1F5F9' }, ticks: { callback: v => v + '%' }, min: 0, max: 60 }
+        }
+      }
+    });
+  }
+}
+
+// Realtime Simulator
+function initSimulator() {
+  const rAtt = document.getElementById('rangeAtt');
+  const rStream = document.getElementById('rangeStream');
+  const rCheki = document.getElementById('rangeCheki');
+  const rGoods = document.getElementById('rangeGoods');
+  if (!rAtt) return;
+
+  const dAtt = document.getElementById('dispAtt');
+  const dStream = document.getElementById('dispStream');
+  const dCheki = document.getElementById('dispCheki');
+  const dGoods = document.getElementById('dispGoods');
+  const resTotal = document.getElementById('resTotal');
+  const resExp = document.getElementById('resExp');
+  const resProfit = document.getElementById('resProfit');
+  const resAnnual = document.getElementById('resAnnual');
+
+  function updateCleanSim() {
+    const att = parseInt(rAtt.value);
+    const stream = parseInt(rStream.value);
+    const cheki = parseInt(rCheki.value);
+    const goods = parseInt(rGoods.value);
+
+    dAtt.textContent = att + '名';
+    dStream.textContent = stream + '枚';
+    dCheki.textContent = cheki + '枚';
+    dGoods.textContent = '¥' + goods.toLocaleString();
+
+    const ticketRev = att * 1500;
+    const streamRev = stream * 1200;
+    const chekiRev = cheki * 1000;
+    const totalGoods = chekiRev + goods;
+    const total = ticketRev + streamRev + totalGoods;
+
+    const chekiExp = cheki * 400;
+    const goodsExp = goods * 0.3;
+    const streamExp = streamRev * 0.1;
+    const tigetExp = ticketRev * 0.055;
+    const exp = 45000 + 10000 + chekiExp + goodsExp + streamExp + tigetExp;
+    const profit = total - exp;
+    const annual = profit * 12;
+
+    resTotal.textContent = '¥' + Math.round(total).toLocaleString();
+    resExp.textContent = '¥' + Math.round(exp).toLocaleString();
+
+    if (profit >= 0) {
+      resProfit.textContent = '+¥' + Math.round(profit).toLocaleString();
+      resProfit.style.color = '#4ADE80';
+      resAnnual.textContent = '約' + Math.round(annual / 10000) + '万円';
+      resAnnual.style.color = '#4ADE80';
+    } else {
+      resProfit.textContent = '▲¥' + Math.round(Math.abs(profit)).toLocaleString();
+      resProfit.style.color = '#F87171';
+      resAnnual.textContent = '▲約' + Math.round(Math.abs(annual) / 10000) + '万円';
+      resAnnual.style.color = '#F87171';
+    }
+  }
+
+  [rAtt, rStream, rCheki, rGoods].forEach(input => {
+    input.addEventListener('input', updateCleanSim);
+  });
+  updateCleanSim();
+}
 
 </script>
 </body>
