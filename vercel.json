@@ -32,8 +32,20 @@
       "destination": "/portal.html"
     },
     {
+      "source": "/presentation",
+      "destination": "/presentation.html"
+    },
+    {
+      "source": "/slides",
+      "destination": "/presentation.html"
+    },
+    {
       "source": "/mtg",
-      "destination": "/mtg-presentation.html"
+      "destination": "/presentation.html"
+    },
+    {
+      "source": "/report",
+      "destination": "/yagate-monetization-report.html"
     },
     {
       "source": "/showcase",

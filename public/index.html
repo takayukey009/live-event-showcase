@@ -488,7 +488,7 @@ table.data-table tbody tr:hover {
 
     <div class="tabs">
       <button class="tab-btn active" id="btn-tab-html" onclick="switchMainTab('html-mtg')">
-        <i data-lucide="presentation" style="width:16px;height:16px;"></i> ① MTGプレゼン (HTML)
+        <i data-lucide="presentation" style="width:16px;height:16px;"></i> ① 16:9 プレゼン (HTML)
       </button>
       <button class="tab-btn" id="btn-tab-excel-mtg" onclick="switchMainTab('excel-mtg')">
         <i data-lucide="file-spreadsheet" style="width:16px;height:16px;"></i> ② MTG資料 (Excel)
@@ -499,6 +499,9 @@ table.data-table tbody tr:hover {
     </div>
 
     <div class="actions">
+      <a href="/presentation" target="_blank" class="btn-outline" style="border-color:#2563EB; color:#60A5FA;" title="16:9 プレゼンテーション全画面">
+        <i data-lucide="presentation" style="width:14px;height:14px;"></i> 16:9 スライド ↗
+      </a>
       <a href="/showcase" class="btn-outline" style="border-color:#4F46E5; color:#818CF8;" title="公演特設ページへ">
         <i data-lucide="sparkles" style="width:14px;height:14px;"></i> 公演ショーケース
       </a>
@@ -513,14 +516,14 @@ table.data-table tbody tr:hover {
 </header>
 
 <main>
-  <!-- TAB 1: MTG HTML PRESENTATION -->
+  <!-- TAB 1: MTG 16:9 HTML PRESENTATION -->
   <div id="view-html-mtg" class="view-section active">
     <div class="floating-status">
-      <span>💡 <strong>YAGATE 定例MTG資料 (HTMLプレゼンテーション)</strong> を直接埋め込み表示しています。</span>
-      <a href="./mtg-presentation.html" target="_blank" style="color:#818CF8; font-weight:600; text-decoration:none;">全画面で開く ↗</a>
+      <span>💡 <strong>YAGATE 定例MTG 16:9 プレゼンテーションスライド</strong> を埋め込み表示しています。（キーボード ← → や画面下のバーで操作可能）</span>
+      <a href="/presentation" target="_blank" style="color:#818CF8; font-weight:600; text-decoration:none;">16:9 全画面で開く ↗</a>
     </div>
-    <div class="html-frame-container">
-      <iframe src="./mtg-presentation.html" class="html-frame" title="YAGATE 定例MTG資料"></iframe>
+    <div class="html-frame-container" style="background:#0B0F17;">
+      <iframe src="/presentation.html" class="html-frame" title="YAGATE 16:9 プレゼンテーションスライド"></iframe>
     </div>
   </div>
 
