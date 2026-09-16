@@ -243,153 +243,88 @@ body {
       </div>
     </div>
 
-    <!-- SLIDE 3: VENUE & BREAKEVEN -->
+    <!-- SLIDE 3: TRAFFIC SOURCES (SECTION 01) -->
     <div class="slide" id="slide-3">
       <div class="slide-header">
-        <div class="slide-badge">02. コスト構造 & 損益分岐</div>
-        <h2 class="slide-title">1公演の構造：会場費による分岐点の違い</h2>
-        <p class="slide-subtitle">会場を変えるだけで1回15,000円（年間18万円）の固定費差が発生</p>
+        <div class="slide-badge">SECTION 01 | 集客構造分析</div>
+        <h2 class="slide-title">流入経路分析：X（Twitter）依存とGoogle検索の急伸</h2>
+        <p class="slide-subtitle">Xが全体の38.5%（人気回は52.8%）。Google自然検索が26.2%（直近31.0%）に成長。公式HP送客はわずか1.5%</p>
       </div>
       <div class="slide-body">
-        <div class="grid-2">
-          <div class="card" style="border-top: 6px solid #4F46E5;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-              <h3 style="font-size:28px; font-weight:800; color:#0F172A;">新宿ハイジアV-1</h3>
-              <span style="padding:6px 14px; background:#EEF2FF; color:#4F46E5; font-weight:700; border-radius:8px;">現行メイン会場</span>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:28px;">
-              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                <span style="color:#64748B;">会場費（定価）</span>
-                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥45,000</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                <span style="color:#64748B;">ゲストギャラ（1組目安）</span>
-                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                <span style="color:#64748B;">学生スタッフ運営費</span>
-                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:22px; font-weight:800; color:#1E293B;">
-                <span>1公演合計コスト</span>
-                <span style="font-family:'Plus Jakarta Sans',monospace; color:#2563EB;">¥53,000</span>
-              </div>
-            </div>
-            <div style="background:#F1F5F9; border-radius:12px; padding:20px; text-align:center;">
-              <span style="font-size:16px; color:#64748B; font-weight:600;">損益分岐動員数（単価1,500円換算）</span>
-              <div style="font-size:48px; font-weight:900; color:#0F172A; font-family:'Plus Jakarta Sans',monospace;">36 <span style="font-size:22px; font-weight:600; color:#64748B;">枚</span></div>
+        <div class="grid-2" style="align-items:center;">
+          <div class="card" style="padding:24px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <h4 style="font-size:16px; font-weight:700; color:var(--text-muted); margin-bottom:12px;">流入チャネル構成比 (全40公演 集計)</h4>
+            <div style="width:100%; height:340px; position:relative;">
+              <canvas id="sourceChart"></canvas>
             </div>
           </div>
-
-          <div class="card" style="border-top: 6px solid #10B981;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-              <h3 style="font-size:28px; font-weight:800; color:#0F172A;">下北沢シアターミネルヴァ</h3>
-              <span style="padding:6px 14px; background:#ECFDF5; color:#059669; font-weight:700; border-radius:8px;">候補会場</span>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div class="card" style="border-left:6px solid #2563EB; padding:20px;">
+              <h4 style="font-size:18px; font-weight:800; color:#1E3A8A; margin-bottom:6px;">① X（旧Twitter）が最大導線（38.5%〜52.8%）</h4>
+              <p style="font-size:15px; color:#334155; line-height:1.6;">
+                告知初速を生む唯一の導線。特にケビンス出演回（vol.34）ではゲスト拡散等により<strong>738PV（52.8%）</strong>まで跳ね上がり即日完売を記録。
+              </p>
             </div>
-            <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:28px;">
-              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                <span style="color:#64748B;">会場費（定価）</span>
-                <strong style="font-family:'Plus Jakarta Sans',monospace; color:#059669;">¥30,000（▲15,000円）</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                <span style="color:#64748B;">ゲストギャラ（1組目安）</span>
-                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:18px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
-                <span style="color:#64748B;">学生スタッフ運営費</span>
-                <strong style="font-family:'Plus Jakarta Sans',monospace;">¥4,000</strong>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:22px; font-weight:800; color:#1E293B;">
-                <span>1公演合計コスト</span>
-                <span style="font-family:'Plus Jakarta Sans',monospace; color:#059669;">¥38,000</span>
-              </div>
+            <div class="card" style="border-left:6px solid #0F172A; padding:20px;">
+              <h4 style="font-size:18px; font-weight:800; color:#0F172A; margin-bottom:6px;">② Googleオーガニック検索が第2位（26.2%〜31.0%）</h4>
+              <p style="font-size:15px; color:#334155; line-height:1.6;">
+                「YAGATE」「ハイジアV-1」「お笑いライブ」等の自然検索が急成長。直近vol.38では<strong>31.0%</strong>に達し、スケジュールを探すファンの定常受け皿。
+              </p>
             </div>
-            <div style="background:#ECFDF5; border-radius:12px; padding:20px; text-align:center;">
-              <span style="font-size:16px; color:#065F46; font-weight:600;">損益分岐動員数（単価1,500円換算）</span>
-              <div style="font-size:48px; font-weight:900; color:#059669; font-family:'Plus Jakarta Sans',monospace;">26 <span style="font-size:22px; font-weight:600; color:#047857;">枚（▲10枚）</span></div>
+            <div class="card" style="border-left:6px solid #DC2626; padding:20px; background:#FEF2F2;">
+              <h4 style="font-size:18px; font-weight:800; color:#991B1B; margin-bottom:6px;">③ 公式サイト（yagate.jp）の送客不全（わずか1.5%）</h4>
+              <p style="font-size:15px; color:#7F1D1D; line-height:1.6;">
+                公演あたりわずか4〜13PVにとどまり機能不全。SEO・AIO整備と出演者プロフィールの充実により、検索・SNSからの受け皿化が必須。
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div class="slide-footer">
-        <span>※直近12公演の平均動員は37.4枚。現在の体制であればどちらの会場でも分岐を上回る実績。</span>
+        <span>TIGETアクセス解析API（Referrerデータ）集計</span>
         <span>Slide 03 / 11</span>
       </div>
     </div>
 
-    <!-- SLIDE 4: TRAFFIC & CVR LAW -->
+    <!-- SLIDE 4: BOOKING LEAD TIME & CANCELLATIONS (SECTION 01-B) -->
     <div class="slide" id="slide-4">
       <div class="slide-header">
-        <div class="slide-badge">03. 集客の力学</div>
-        <h2 class="slide-title">「発売初日のアクセス」でその回の枚数が決まる</h2>
-        <p class="slide-subtitle">CVR（購入率）は4.8%でほぼ一定。長く販売しても枚数は増えない</p>
+        <div class="slide-badge">SECTION 01-B | 予約とドタキャン構造</div>
+        <h2 class="slide-title">告知初動の「とりあえず予約」と直前客の機会損失</h2>
+        <p class="slide-subtitle">告知初動（22日以上前）は予約の50.2%集中もキャンセル率32.4% vs 直前客（15.6%）はキャンセル率わずか10.0%</p>
       </div>
       <div class="slide-body">
-        <div class="grid-2">
-          <div>
-            <table class="table-custom">
-              <thead>
-                <tr>
-                  <th>公演</th>
-                  <th class="num">発売初日PV</th>
-                  <th class="num">総PV</th>
-                  <th class="num">販売枚数</th>
-                  <th class="num">販売日数</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="highlight-row">
-                  <td><strong>vol.34</strong>（ケビンス回）</td>
-                  <td class="num">228 人</td>
-                  <td class="num">1,399</td>
-                  <td class="num text-primary">64 枚</td>
-                  <td class="num">23 日</td>
-                </tr>
-                <tr>
-                  <td><strong>vol.37</strong>（無尽蔵回）</td>
-                  <td class="num">115 人</td>
-                  <td class="num">896</td>
-                  <td class="num text-success">44 枚</td>
-                  <td class="num">27 日</td>
-                </tr>
-                <tr>
-                  <td><strong>vol.35</strong>（ゲストなし）</td>
-                  <td class="num">32 人</td>
-                  <td class="num">625</td>
-                  <td class="num">28 枚</td>
-                  <td class="num">17 日</td>
-                </tr>
-                <tr style="background:#FEF2F2;">
-                  <td><strong>vol.36</strong>（ゲストなし）</td>
-                  <td class="num text-danger">32 人</td>
-                  <td class="num">426</td>
-                  <td class="num text-danger">19 枚</td>
-                  <td class="num">29 日（最長）</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:20px;">
-            <div class="card" style="background:#EFF6FF; border-color:#BFDBFE;">
-              <h4 style="font-size:20px; font-weight:800; color:#1E40AF; margin-bottom:8px;">💡 集客分析から判明した決定的な事実</h4>
-              <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:17px; color:#1E3A8A; line-height:1.6;">
-                <li>• <strong>販売期間が最長（29日）のvol.36が最下位（19枚）</strong>：ダラダラ告知しても枚数は伸びない。</li>
-                <li>• <strong>CVR（購入率）は全公演通して平均4.8%で不変</strong>：告知を見た人の約20人に1人が買う。</li>
-                <li>• <strong>初動24時間の露出量＝最終動員数</strong>：発売日の全員一斉ポストとゲスト拡散が成否を分ける。</li>
-              </ul>
+        <div class="grid-2" style="align-items:center;">
+          <div class="card" style="padding:24px;">
+            <h4 style="font-size:16px; font-weight:700; color:var(--text-muted); margin-bottom:12px;">予約タイミング別のシェア(青) vs キャンセル率(赤)</h4>
+            <div style="width:100%; height:340px; position:relative;">
+              <canvas id="leadTimeChart"></canvas>
             </div>
-            <div class="card">
-              <div class="kpi-title">アクセス数から着地枚数を予測する回帰モデル</div>
-              <div style="font-size:24px; font-weight:700; color:#0F172A; margin-bottom:8px;">
-                見込み動員 ＝ アクセス数 × 4.8% ＋ 2.5枚
-              </div>
-              <p style="font-size:15px; color:#64748B;">新宿ハイジアV-1を完売（65枚）にするには、総PV <strong>1,425件</strong>（初日200PV以上）が目標ライン。</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div class="card" style="border-left:6px solid #DC2626; padding:20px;">
+              <h4 style="font-size:18px; font-weight:800; color:#991B1B; margin-bottom:6px;">初動予約の約3人に1人がドタキャン（32.4%）</h4>
+              <p style="font-size:15px; color:#334155; line-height:1.6;">
+                「当日現金払いでキャンセル料ゼロ」なため、告知初動で「とりあえずキープ」し、直前で行かなくなるモラルハザードが発生。
+              </p>
+            </div>
+            <div class="card" style="border-left:6px solid #16A34A; padding:20px;">
+              <h4 style="font-size:18px; font-weight:800; color:#166534; margin-bottom:6px;">直前駆け込み客（15.6%）の来場確度は90%</h4>
+              <p style="font-size:15px; color:#334155; line-height:1.6;">
+                公演3日前〜当日に予約する客層（218名）のキャンセル率はわずか10.0%。しかし初動客で満席表示になると購入できません。
+              </p>
+            </div>
+            <div class="card" style="border-left:6px solid #D97706; padding:20px; background:#FFFBEB;">
+              <h4 style="font-size:18px; font-weight:800; color:#92400E; margin-bottom:6px;">⚠️ 見かけの完売と空席のパラドックス</h4>
+              <p style="font-size:15px; color:#78350F; line-height:1.6;">
+                TIGET上は「満席（65席）」で直前購入をブロックされ、当日は20席以上空席になるという最大の機会損失が発生しています。
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div class="slide-footer">
-        <span>GATE TALENT AGENCY | YAGATE LIVE 収益レポート</span>
+        <span>全40公演 チケット予約日時・キャンセル日時・来場突合ログより集計</span>
         <span>Slide 04 / 11</span>
       </div>
     </div>
