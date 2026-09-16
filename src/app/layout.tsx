@@ -34,6 +34,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://www.yagate.jp',
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   other: {
     'line:card': 'summary_large_image',
     'line:title': `YAGATE LIVE ${currentEvent.eventVolume} | 友田オレ出演・${currentEvent.date}`,
@@ -60,45 +71,97 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Event",
-              name: `YAGATE LIVE ${currentEvent.eventVolume}`,
-              startDate: `${currentEvent.date}T${currentEvent.time.replace(/[^0-9:]/g, '') || '19:45'}:00`,
-              endDate: undefined,
-              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-              eventStatus: "https://schema.org/EventScheduled",
-              location: {
-                "@type": "Place",
-                name: currentEvent.venue,
-                address: {
-                  "@type": "PostalAddress",
-                  "addressLocality": "東京都新宿区",
-                  "addressRegion": "東京都",
-                  "postalCode": "160-0021",
-                  "streetAddress": "歌舞伎町2-44-1 ハイジアB1"
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.yagate.jp/#organization",
+                  "name": "GATE TALENT AGENCY",
+                  "alternateName": "株式会社GATE",
+                  "url": "https://www.yagate.jp",
+                  "logo": "https://www.yagate.jp/images/og-image.jpg",
+                  "sameAs": [
+                    "https://x.com/gate_yagate",
+                    "https://tiget.net/users/1209355"
+                  ]
+                },
+                {
+                  "@type": "PerformingGroup",
+                  "@id": "https://www.yagate.jp/#yagate-group",
+                  "name": "YAGATE",
+                  "description": "GATE所属芸人によるユニットライブ",
+                  "member": performers.map(p => ({
+                    "@type": "Person",
+                    "name": p.name
+                  }))
+                },
+                {
+                  "@type": "ComedyEvent",
+                  "@id": "https://www.yagate.jp/#current-event",
+                  "name": `YAGATE LIVE ${currentEvent.eventVolume}`,
+                  "startDate": `${currentEvent.date}T${currentEvent.time.replace(/[^0-9:]/g, '') || '19:45'}:00`,
+                  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                  "eventStatus": "https://schema.org/EventScheduled",
+                  "location": {
+                    "@type": "Place",
+                    "name": currentEvent.venue,
+                    "address": {
+                      "@type": "PostalAddress",
+                      "addressLocality": "東京都新宿区",
+                      "addressRegion": "東京都",
+                      "postalCode": "160-0021",
+                      "streetAddress": "歌舞伎町2-44-1 ハイジアB1"
+                    }
+                  },
+                  "image": [
+                    "https://www.yagate.jp/images/og-image.jpg"
+                  ],
+                  "description": currentEvent.description?.split('\n')[0] || '',
+                  "organizer": { "@id": "https://www.yagate.jp/#organization" },
+                  "performer": performers.map(p => ({
+                    "@type": "Person",
+                    "name": p.name
+                  })),
+                  "offers": {
+                    "@type": "Offer",
+                    "url": currentEvent.ticketUrl,
+                    "price": "1500",
+                    "priceCurrency": "JPY",
+                    "availability": "https://schema.org/InStock",
+                    "validFrom": "2024-12-01T12:00",
+                    "validThrough": `${currentEvent.date}T${currentEvent.time.replace(/[^0-9:]/g, '') || '19:45'}:00`
+                  }
+                },
+                {
+                  "@type": "FAQPage",
+                  "@id": "https://www.yagate.jp/#faq",
+                  "mainEntity": [
+                    {
+                      "@type": "Question",
+                      "name": "YAGATE（ヤゲート）とはどんなライブですか？",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "YAGATEは、GATE TALENT AGENCYが主催する定期事務所お笑いライブです。友田オレをはじめとするGATE所属芸人が新ネタや企画コーナーを披露します。"
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "チケットはどこで購入できますか？",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "TIGET（チゲット）のYAGATE公式ページにて前売券（1,500円）をお求めいただけます。"
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "会場（新宿ハイジアV-1）へのアクセスは？",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "西武新宿駅北口より徒歩2分、JR新宿駅東口より徒歩8分です。"
+                      }
+                    }
+                  ]
                 }
-              },
-              image: [
-                "https://www.yagate.jp/images/og-image.jpg"
-              ],
-              description: currentEvent.description?.split('\n')[0] || '',
-              organizer: {
-                "@type": "Organization",
-                name: "GATE",
-                url: "https://www.yagate.jp"
-              },
-              performer: performers.map(p => ({
-                "@type": "Person",
-                name: p.name
-              })),
-              offers: {
-                "@type": "Offer",
-                url: currentEvent.ticketUrl,
-                price: "1500",
-                priceCurrency: "JPY",
-                availability: "https://schema.org/InStock",
-                validFrom: "2024-12-01T12:00",
-                validThrough: `${currentEvent.date}T${currentEvent.time.replace(/[^0-9:]/g, '') || '19:45'}:00`
-              }
+              ]
             })
           }}
         />

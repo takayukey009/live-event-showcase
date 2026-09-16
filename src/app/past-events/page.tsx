@@ -3,6 +3,8 @@ import { pastEvents } from '@/data/pastEvents';
 import EventListJsonLd from './EventListJsonLd';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
+export { metadata } from './metadata';
+
 export default function PastEventsPage() {
   return (
     <main className="max-w-3xl mx-auto py-12 px-4">
